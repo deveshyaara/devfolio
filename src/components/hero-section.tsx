@@ -22,16 +22,16 @@ export default function HeroSection() {
                 />
             )}
           </div>
-          <div className="flex flex-col justify-center space-y-4">
+          <div className="flex flex-col justify-center space-y-4 text-center lg:text-left">
             <div className="space-y-2">
               <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
                 Hello, I'm {devName}
               </h1>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl">
+              <p className="max-w-[600px] text-muted-foreground md:text-xl mx-auto lg:mx-0">
                 {bio}
               </p>
             </div>
-            <div className="flex items-center gap-2 pt-4">
+            <div className="flex items-center gap-2 pt-4 justify-center lg:justify-start">
               {socialLinks.map((link) => (
                 <Button key={link.name} variant="outline" size="icon" asChild>
                   <a href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.name}>

@@ -36,7 +36,7 @@ export default function ProjectsSection() {
                             alt={`Screenshot of ${project.title}`}
                             width={600}
                             height={400}
-                            className="rounded-t-lg object-cover aspect-[3/2]"
+                            className="rounded-lg object-cover aspect-[3/2]"
                             data-ai-hint={projectImage.imageHint}
                         />
                     )}

@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { Mail } from 'lucide-react';
+import { Mail,Linkedin,Instagram, Icon } from 'lucide-react';
+import { socialLinks } from '@/lib/data';
+import React from 'react';
 
 export default function ContactSection() {
   return (
@@ -11,13 +13,14 @@ export default function ContactSection() {
             Have a project in mind or just want to say hi? My inbox is always open.
           </p>
         </div>
-        <div className="mx-auto w-full max-w-sm space-y-2">
-            <Button size="lg" asChild className="transition-transform duration-300 hover:scale-105">
-                <a href="mailto:hello@example.com">
-                    <Mail className="mr-2 h-5 w-5"/>
-                    Contact Me
-                </a>
-            </Button>
+        <div className="mx-auto w-full max-w-sm space-y-2"  >
+            {socialLinks.map((link) => (
+                <Button key={link.name} variant="outline" size="icon" asChild>
+                  <a href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.name}>
+                    {React.createElement(link.icon, { className: "h-5 w-5 text-primary" })}
+                  </a>
+                </Button>
+              ))}
         </div>
       </div>
     </section>

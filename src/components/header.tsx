@@ -30,7 +30,7 @@ export default function Header() {
         <div className="mr-4 hidden items-center lg:flex">
           <Link href="/" className="flex items-center gap-2 font-bold text-lg font-headline">
             <Code className="h-6 w-6 text-primary" />
-            <span>Devfolio</span>
+            <span>Devesh Tiwari</span>
           </Link>
         </div>
         <nav className="hidden items-center gap-4 text-sm lg:flex flex-1 justify-center">

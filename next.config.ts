@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: 'media.licdn.com',
         port: '',
         pathname: '/**',
       },
@@ -28,6 +28,7 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      
     ],
   },
 };

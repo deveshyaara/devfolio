@@ -14,11 +14,11 @@ import { Github, Link as LinkIcon } from 'lucide-react';
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+    <section id="projects" className="w-full py-12 md:py-20 lg:py-32 bg-secondary">
+      <div id="1"className="container px-4 md:px-6" >
+        <div id="2"className="flex flex-col items-center justify-center space-y-4 text-center" >
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl text-primary">My Projects</h2>
+            <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl text-primary" >My Projects</h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               Here are some of the projects I've worked on. Feel free to check them out.
             </p>

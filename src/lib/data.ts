@@ -32,9 +32,9 @@ export const projects: Project[] = [
   {
     id: 'project-1',
     title: 'E-Commerce Platform-Backend',
-    description: 'A modern e-commerce site backend with a focus on user experience and performance.',
+    description: 'This project provides a RESTful API for managing e-commerce operations such as user authentication, category management, product management, and cart functionality. It is built using Node.js, Express.js, and MongoDB, and includes features like JWT-based authentication, CRUD operations for categories and products, and cart management with quantity updates.',
     image: 'project-1',
-    liveDemoUrl: '#',
+    liveDemoUrl: 'https://documenter.getpostman.com/view/34764585/2sA3JQ3yun',
     repoUrl: 'https://github.com/deveshyaara/E-Commerce-Backend.git',
   },
   {
@@ -45,14 +45,14 @@ export const projects: Project[] = [
     liveDemoUrl: 'https://wealth-wise-kappa.vercel.app/',
     repoUrl: 'https://github.com/deveshyaara/WealthWise',
   },
-  // {
-  //   id: 'project-3',
-  //   title: 'Portfolio Website',
-  //   description: 'A personal portfolio site (like this one!) to showcase my work and skills, with a focus on clean design.',
-  //   image: 'project-3',
-  //   liveDemoUrl: '#',
-  //   repoUrl: '#',
-  // },
+  {
+    id: 'project-3',
+    title: 'Portfolio Website',
+    description: 'A personal portfolio site to showcase my work and skills, with a focus on clean design.',
+    image: 'project-3',
+    liveDemoUrl: 'https://devfolio-taupe.vercel.app/',
+    repoUrl: 'https://github.com/deveshyaara/devfolio.git',
+  },
 ];
 
 export const skills: Skill[] = [

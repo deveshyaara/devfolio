@@ -48,7 +48,7 @@ export const projects: Project[] = [
   {
     id: 'project-3',
     title: 'Portfolio Website',
-    description: 'A personal portfolio site to showcase my work and skills, with a focus on clean design.',
+    description: 'Devfolio is a personal portfolio website that displays a developer’s projects, technical skills, certifications, and contact information. It serves as an interactive online resume, allowing visitors to view detailed overviews of completed work, technology expertise, and ways to connect or collaborate.',
     image: 'project-3',
     liveDemoUrl: 'https://devfolio-taupe.vercel.app/',
     repoUrl: 'https://github.com/deveshyaara/devfolio.git',

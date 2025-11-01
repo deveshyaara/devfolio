@@ -66,3 +66,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Print Styles for Resume Page */
+@media print {
+  header {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+  }
+  @page {
+    margin: 1cm;
+  }
+}

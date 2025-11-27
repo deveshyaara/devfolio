@@ -42,11 +42,11 @@ export default function ResumeSection() {
   const certifications = [
     {
       name: 'Google: Build Real World AI Applications',
-      issuer: 'Coursera',
+      issuer: 'Google Cloud',
       date: '2025',
     },
     {
-      name: 'Advanced System Design',
+      name: 'System Design',
       issuer: 'Physics Wallah',
       date: ' ',
     },

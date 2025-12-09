@@ -2,7 +2,7 @@
 
 A modern, responsive developer portfolio built with Next.js 15, TypeScript, and Tailwind CSS. This portfolio showcases projects, skills, and provides a professional online presence.
 
-🌐 **Live Demo**: [https://devesh.co.in](https://devesh.co.in)
+🌐 **Live Demo**: [https://devesh.co.in](https://devesh.co.in/)
 
 ## 🚀 Features
 

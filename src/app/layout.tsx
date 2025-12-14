@@ -23,6 +23,8 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
+      </head>
+      <body className="font-body antialiased">
         {children}
         <Toaster />
         <Chatbot />

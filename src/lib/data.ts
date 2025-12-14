@@ -53,6 +53,14 @@ export const projects: Project[] = [
     liveDemoUrl: 'https://devfolio-taupe.vercel.app/',
     repoUrl: 'https://github.com/deveshyaara/devfolio.git',
   },
+  {
+    id: 'project-4',
+    title: 'Healthlink-Etherium Health Records',
+    description: 'HealthLink is a decentralized health records management system built on the Ethereum blockchain. It allows patients to securely store and share their medical records with healthcare providers, ensuring data integrity and privacy through blockchain technology. The platform includes features for record creation, access control, and audit trails.',
+    image: 'project-4',
+    liveDemoUrl: 'https://healthlink.devesh.co.in/',
+    repoUrl: 'https://github.com/deveshyaara/Healthlink_RPC.git',
+  },
 ];
 
 export const skills: Skill[] = [

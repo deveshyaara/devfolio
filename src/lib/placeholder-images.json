@@ -23,6 +23,12 @@
       "description": "Screenshot of a personal portfolio website.",
       "imageUrl": "/portfolio.png",
       "imageHint": "website design"
+    },
+    {
+      "id": "project-4",
+      "description": "Screenshot of Healthlink-Etherium Health Records project.",
+      "imageUrl": "/healthlink.png",
+      "imageHint": "blockchain application"
     }
   ]
 }

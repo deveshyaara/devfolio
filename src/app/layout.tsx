@@ -16,15 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark scroll-smooth">
-      <head>
+      <body className="font-body antialiased">
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3061580844965201"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-      </head>
-      <body className="font-body antialiased">
         {children}
         <Toaster />
         <Chatbot />

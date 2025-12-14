@@ -71,8 +71,10 @@ export default function ProjectsSection() {
                           src={projectImage.imageUrl}
                           alt={`Screenshot of ${project.title}`}
                           fill
+                          loading="lazy"
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           data-ai-hint={projectImage.imageHint}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                           <Button variant="outline" size="icon" asChild className="rounded-full bg-background/80 hover:bg-primary hover:text-primary-foreground border-primary/50">

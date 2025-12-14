@@ -58,8 +58,10 @@ export default function HeroSection() {
                   src={profileImage.imageUrl}
                   alt="Profile Picture"
                   fill
+                  priority
                   className="rounded-full object-cover border-2 border-primary/50 shadow-2xl shadow-primary/20 relative z-10"
                   data-ai-hint={profileImage.imageHint}
+                  sizes="(max-width: 768px) 300px, 400px"
                 />
               )}
             </div>

@@ -204,11 +204,6 @@ export default function SkillsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <motion.span 
-              className="inline-block px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-medium text-white/50 tracking-[0.2em] uppercase mb-3"
-            >
-              Tech Arsenal
-            </motion.span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
               Skills & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">Technologies</span>
             </h2>

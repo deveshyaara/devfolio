@@ -42,7 +42,7 @@ export const projects: Project[] = [
     title: 'WealthWise-AI Finance Platform',
     description: 'Built a modern, AI-powered personal finance management platform that enables users to track income and expenses, manage multiple financial accounts, set budgets, and gain personalized financial insights. The platform includes a Google Gemini-powered receipt scanner to automatically extract transaction details from images, as well as features for recurring transactions, monthly financial reports, budget alerts, and interactive visual analytics.',
     image: 'project-2',
-    liveDemoUrl: 'https://wealth-wise-kappa.vercel.app/',
+    liveDemoUrl: 'https://wealthwise.devesh.co.in/',
     repoUrl: 'https://github.com/deveshyaara/WealthWise',
   },
   {

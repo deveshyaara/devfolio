@@ -61,6 +61,14 @@ export const projects: Project[] = [
     liveDemoUrl: 'https://healthlink.devesh.co.in/',
     repoUrl: 'https://github.com/deveshyaara/Healthlink_RPC.git',
   },
+  {
+    id: 'project-5',
+    title: 'QR Mapper - Badge to Ticket Linker',
+    description: 'A staff-facing QR mapping tool that links pre-printed badge QR codes to dynamic event ticket URLs. Staff scan a badge then scan the attendee\'s QR ticket to create a mapping in Supabase. When attendees later scan their own badge, they are instantly redirected to their ticket page. Built with Next.js 16 (App Router, TypeScript), Supabase (PostgreSQL), Tailwind CSS v4, and @yudiel/react-qr-scanner for camera-based scanning.',
+    image: 'project-5',
+    liveDemoUrl: 'https://qr-mapper-mu.vercel.app/',
+    repoUrl: 'https://github.com/deveshyaara/qr-mapper',
+  },
 ];
 
 export const skills: Skill[] = [

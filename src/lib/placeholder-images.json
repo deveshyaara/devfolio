@@ -29,6 +29,12 @@
       "description": "Screenshot of Healthlink-Etherium Health Records project.",
       "imageUrl": "/healthlink.png",
       "imageHint": "blockchain application"
+    },
+    {
+      "id": "project-5",
+      "description": "Screenshot of a qr-mapper for event management.",
+      "imageUrl": "/project-5.png",
+      "imageHint": "QR code mapping interface"
     }
   ]
 }

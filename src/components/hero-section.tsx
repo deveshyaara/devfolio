@@ -1,11 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { socialLinks, bio, name as devName } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+
+const ParticleField = dynamic(() => import("@/components/particle-field"), {
+  ssr: false,
+});
 
 const roles = ["AI & Full Stack Developer", "Generative AI Engineer", "Full Stack Developer"];
 
@@ -34,14 +39,15 @@ export default function HeroSection() {
   }, [text, isDeleting, roleIndex]);
 
   return (
-    <section id="about" className="relative w-full py-12 md:py-24 lg:py-32 overflow-hidden bg-background">
-      {/* Dynamic Background */}
+    <section id="about" className="relative w-full min-h-[90vh] py-12 md:py-24 lg:py-32 overflow-hidden bg-background">
+      {/* Particle Network Background — dots form "DEVESH" vertically on the left */}
       <div className="absolute inset-0 w-full h-full">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+        <ParticleField />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </div>
 
-      <div className="container relative px-4 md:px-6 z-10">
+      {/* Main Content */}
+      <div className="container relative px-4 md:px-6 z-10 pl-20 sm:pl-28 lg:pl-32">
         <div className="grid gap-10 lg:grid-cols-2 items-center">
 
           {/* Profile Image with Glow */}
@@ -51,7 +57,7 @@ export default function HeroSection() {
             transition={{ duration: 0.5 }}
             className="flex items-center justify-center order-2 lg:order-1"
           >
-            <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
+            <div className="relative w-[250px] h-[250px] md:w-[350px] md:h-[350px]">
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-3xl opacity-30 animate-pulse" />
               {profileImage && (
                 <Image
@@ -61,7 +67,7 @@ export default function HeroSection() {
                   priority
                   className="rounded-full object-cover border-2 border-primary/50 shadow-2xl shadow-primary/20 relative z-10"
                   data-ai-hint={profileImage.imageHint}
-                  sizes="(max-width: 768px) 300px, 400px"
+                  sizes="(max-width: 768px) 250px, 350px"
                 />
               )}
             </div>
@@ -98,7 +104,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="flex items-center gap-4 pt-4 justify-center lg:justify-start"
             >
-              {socialLinks.map((link, index) => (
+              {socialLinks.map((link) => (
                 <Button
                   key={link.name}
                   variant="outline"
@@ -115,6 +121,21 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Bottom CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="relative z-10 mt-16 flex flex-col items-center text-center px-4"
+      >
+        <h2 className="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-wide text-white">
+          EXPLORE MY WORK
+        </h2>
+        <p className="mt-3 max-w-xl text-sm sm:text-base md:text-lg text-muted-foreground font-body">
+          A curation of creative development, frontend coding, and design projects
+        </p>
+      </motion.div>
     </section>
   );
 }

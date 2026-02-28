@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background w-full items-center">
       <Header />
-      <main className="flex-1 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <main className="flex-1 w-full">
         <HeroSection />
         <ProjectsSection />
         <SkillsSection />

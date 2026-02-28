@@ -7,7 +7,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-const roles = ["Software Engineer", "Full Stack Developer", "Machine Learning Enthusiast"];
+const roles = ["AI & Full Stack Developer", "Generative AI Engineer", "Full Stack Developer"];
 
 export default function HeroSection() {
   const profileImage = PlaceHolderImages.find(p => p.id === 'profile-picture');
@@ -76,7 +76,7 @@ export default function HeroSection() {
               className="space-y-2"
             >
               <h1 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl xl:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-secondary">
-                Hello, I'm <br />
+                Hello, I&apos;m <br />
                 <span className="text-primary">{devName}</span>
               </h1>
 

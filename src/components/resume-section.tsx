@@ -5,58 +5,9 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
+import { education, experience, certifications } from '@/lib/data';
 
 export default function ResumeSection() {
-  const education = [
-    {
-      degree: 'B.E. in Computer Science',
-      institution: 'Sambhram Institute of Technology Bangalore',
-      period: '2023 - 2027',
-      description: 'Current CGPA: 8.85/10',
-    },
-  ];
-
-  const experience = [
-    {
-      title: 'Creative Team Lead',
-      company: 'OSCode, SAIT Chapter',
-      period: 'Sep 2025 – Present',
-      responsibilities: [
-        'Led design and branding initiatives for impactful visual communication.',
-        'Collaborated on creative ideas, graphics, and content strategies.',
-        'Guided the creative team in producing innovative designs for events.',
-      ],
-    },
-    {
-      title: 'Artificial Intelligence Intern',
-      company: 'Coincent.ai',
-      period: 'June 2024 - August 2024',
-      responsibilities: [
-        'Developed a text classifier using TensorFlow.',
-        'Implemented a Vision Transformer for image classification.',
-        'Worked on data preprocessing, model building, training, and evaluation.',
-      ],
-    },
-  ];
-
-  const certifications = [
-    {
-      name: 'Google: Build Real World AI Applications',
-      issuer: 'Google Cloud',
-      date: '2025',
-    },
-    {
-      name: 'System Design',
-      issuer: 'Physics Wallah',
-      date: ' ',
-    },
-    {
-      name: 'Ethical Hacking',
-      issuer: 'Physics Wallah',
-      date: ' ',
-    },
-  ];
-
   return (
     <section id="resume" className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-background relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,119,198,0.1),transparent_50%)]" />

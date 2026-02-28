@@ -12,54 +12,28 @@ import {
   Award,
   Code,
   ExternalLink,
+  Trophy,
 } from 'lucide-react';
+import {
+  name as devName,
+  education,
+  experience,
+  resumeSkills,
+  resumeProjects,
+  resumeCertDetails,
+  achievements,
+} from '@/lib/data';
 
 export default function ResumePage() {
-  const skills = [
-    { category: 'Programming Languages', items: 'Python, JavaScript, Java, C++, C, HTML, CSS' },
-    { category: 'Web Development', items: 'Node.js, Express.js, MongoDB, Mongoose, API Development, Back-End Web Development, Postman API' },
-    { category: 'Frameworks & Libraries', items: 'Spring Boot, TensorFlow, pandas, NumPy, Matplotlib' },
-    { category: 'Database & Systems', items: 'MongoDB, Database Design, Systems Design, System Architecture, Microservices, Distributed Systems' },
-    { category: 'Software Engineering', items: 'Object-Oriented Programming (OOP), SDLC, Version Control, Debugging, Code Refactoring' },
-    { category: 'DevOps & CI/CD', items: 'DevOps, Continuous Integration, Jenkins' },
-    { category: 'AI & Data Science', items: 'Natural Language Processing (NLP), Artificial Intelligence, Clustering' },
-    { category: 'Cybersecurity', items: 'Ethical Hacking, Network Security, Penetration Testing, Vulnerability Assessment, Cryptography, Kali Linux, Nmap' },
-  ];
-
-  const projects = [
-    {
-      name: 'WealthWise - AI Finance Manager',
-      description: 'Developed an AI-powered personal finance platform using Next.js, Supabase, and Google Gemini API; features include receipt scanning, multi-account tracking, budgeting, analytics, and automated reports. Integrated Clerk for auth, Inngest for recurring jobs, and Recharts for visual insights.',
-      links: [
-        { name: 'GitHub', url: 'https://github.com/deveshyaara/WealthWise' },
-        { name: 'Live Demo', url: 'https://wealthwise-ai.vercel.app/' },
-      ],
-    },
-    {
-      name: 'E-Commerce API',
-      description: 'Developed a RESTful API using Node.js, Express, and MongoDB with JWT-based authentication; implemented modules for user auth, category & product CRUD, and cart management. Documented endpoints in Postman for easy API testing.',
-      links: [
-        { name: 'GitHub', url: 'https://github.com/deveshyaara/E-commerce-API' },
-        { name: 'Postman Docs', url: 'https://documenter.getpostman.com/view/25684224/2sA3dsoEa9' },
-      ],
-    },
-    {
-      name: 'Vision Transformer (ViT) - Image Classification',
-      description: 'Implemented ViT architecture using TensorFlow to classify images from the CIFAR-10 dataset; incorporated patch extraction, encoding, and multi-head self-attention for end-to-end learning. Achieved competitive test accuracy showcasing ViT’s effectiveness in vision tasks.',
-      links: [
-        { name: 'GitHub', url: 'https://github.com/deveshyaara/Vision-Transformer-ViT-for-Image-Classification' },
-      ],
-    },
-  ];
-
   return (
     <div className="flex flex-col items-center min-h-screen bg-background text-foreground p-4 sm:p-6 lg:p-8">
       <main className="w-full max-w-5xl bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl shadow-lg p-8 sm:p-12 print:shadow-none print:border-none print:bg-white print:text-black">
         {/* Header */}
         <header className="relative text-center border-b border-border/50 pb-6 mb-8 print:border-black">
           <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent print:text-black print:bg-none">
-            Devesh Tiwari
+            {devName}
           </h1>
+          <p className="text-sm mt-2 text-primary/80">AI & Full Stack Developer</p>
           <div className="absolute top-0 right-0 print:hidden">
             <a href="/resume.pdf" download="Devesh_Tiwari_Resume.pdf">
               <Button
@@ -99,14 +73,18 @@ export default function ResumePage() {
             <h2 className="text-2xl font-semibold mb-4 flex items-center gap-3 text-primary border-b border-border/50 pb-2 print:border-black">
               <GraduationCap /> Education
             </h2>
-            <div className="space-y-1">
-              <h3 className="text-lg font-semibold text-foreground">B.E. in Computer Science</h3>
-              <p className="text-muted-foreground">Sambhram Institute of Technology Bangalore, Karnataka, India</p>
-              <div className="flex justify-between text-sm text-primary">
-                <span>2023 - 2027</span>
-                <span>Current CGPA: 8.85/10</span>
+            {education.map((edu, index) => (
+              <div key={index} className="space-y-1">
+                <h3 className="text-lg font-semibold text-foreground">{edu.degree}</h3>
+                <p className="text-muted-foreground">
+                  {edu.institution}{edu.location ? `, ${edu.location}` : ''}
+                </p>
+                <div className="flex justify-between text-sm text-primary">
+                  <span>{edu.period}</span>
+                  <span>{edu.description}</span>
+                </div>
               </div>
-            </div>
+            ))}
           </section>
 
           {/* Skills */}
@@ -115,7 +93,7 @@ export default function ResumePage() {
               <Code /> Technical Skills
             </h2>
             <div className="space-y-3">
-              {skills.map((skill) => (
+              {resumeSkills.map((skill) => (
                 <div key={skill.category} className="grid grid-cols-1 md:grid-cols-4 gap-1 text-sm">
                   <strong className="md:col-span-1 text-foreground">{skill.category}:</strong>
                   <p className="md:col-span-3 text-muted-foreground">{skill.items}</p>
@@ -130,32 +108,20 @@ export default function ResumePage() {
               <Briefcase /> Work Experience
             </h2>
             <div className="space-y-6">
-              <div className="space-y-2">
-                <div className="flex justify-between items-baseline">
-                  <h3 className="text-lg font-semibold text-foreground">Creative Team Lead</h3>
-                  <span className="text-sm text-primary">Sep 2025 – Present</span>
+              {experience.map((exp, index) => (
+                <div key={index} className="space-y-2">
+                  <div className="flex justify-between items-baseline">
+                    <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
+                    <span className="text-sm text-primary">{exp.period}</span>
+                  </div>
+                  <p className="text-muted-foreground">{exp.company}</p>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground pl-2">
+                    {exp.responsibilities.map((resp, idx) => (
+                      <li key={idx}>{resp}</li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="text-muted-foreground">OSCode, SAIT Chapter</p>
-                <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground pl-2">
-                  <li>Led design and branding initiatives to ensure impactful visual communication across events, posts, and campaigns.</li>
-                  <li>Collaborated with team members to generate creative ideas, design engaging graphics, and manage content strategies that enhanced community engagement.</li>
-                  <li>Guided the creative team in producing innovative designs for workshops, awareness sessions, and collaborations.</li>
-                  <li>Upheld the identity and vision of the OSCode SAIT Chapter while fostering creativity and innovation.</li>
-                </ul>
-              </div>
-              <div className="space-y-2">
-                <div className="flex justify-between items-baseline">
-                  <h3 className="text-lg font-semibold text-foreground">Artificial Intelligence Intern</h3>
-                  <span className="text-sm text-primary">June 2024 - August 2024</span>
-                </div>
-                <p className="text-muted-foreground">Coincent.ai</p>
-                <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground pl-2">
-                  <li>Developed a text classifier using TensorFlow to categorize text data based on content.</li>
-                  <li>Implemented a Vision Transformer for image classification using a transformer-based architecture.</li>
-                  <li>Worked on data preprocessing, model building, training, and evaluation to ensure high accuracy.</li>
-                  <li>Utilized NLP, pandas, NumPy, Python, and Matplotlib for efficient data handling and visualization.</li>
-                </ul>
-              </div>
+              ))}
             </div>
           </section>
 
@@ -165,7 +131,7 @@ export default function ResumePage() {
               <Github /> Projects
             </h2>
             <div className="space-y-6">
-              {projects.map((project) => (
+              {resumeProjects.map((project) => (
                 <div key={project.name} className="space-y-2">
                   <h3 className="text-lg font-semibold text-foreground">{project.name}</h3>
                   <p className="text-sm text-muted-foreground">{project.description}</p>
@@ -184,16 +150,34 @@ export default function ResumePage() {
           {/* Certifications */}
           <section>
             <h2 className="text-2xl font-semibold mb-4 flex items-center gap-3 text-primary border-b border-border/50 pb-2 print:border-black">
-              <Award /> Certifications & Simulations
+              <Award /> Certifications &amp; Simulations
             </h2>
             <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground pl-2">
-              <li>
-                <strong>Google:</strong> Build Real World AI Applications with Gemini and Imagen, Prompt Design in Vertex AI (Apr 2025)
-                <a href="https://coursera.org/share/e32c1a6e411718423a941a935b2d6f9d" target="_blank" rel="noopener noreferrer" className="text-accent-foreground hover:text-primary ml-2">[Link]</a>
-              </li>
-              <li><strong>Physics Wallah:</strong> Advanced System Design (Microservices, Distributed Systems), Backend Development (Spring Boot, Node.js), Ethical Hacking (Kali Linux, Penetration Testing)</li>
-              <li><strong>Industry Job Simulations:</strong> JPMorgan Chase (API Development, Java), Goldman Sachs (Cryptography), Accenture (CI/CD, DevOps), Wells Fargo (Spring Boot), Walmart (Java, Python)</li>
+              {resumeCertDetails.map((cert, index) => (
+                <li key={index}>
+                  <strong>{cert.label}:</strong> {cert.text}
+                  {cert.link && (
+                    <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-accent-foreground hover:text-primary ml-2">[Link]</a>
+                  )}
+                </li>
+              ))}
             </ul>
+          </section>
+
+          {/* Achievements */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-4 flex items-center gap-3 text-primary border-b border-border/50 pb-2 print:border-black">
+              <Trophy /> Achievements
+            </h2>
+            <div className="space-y-4">
+              {achievements.map((achievement, index) => (
+                <div key={index} className="space-y-1">
+                  <h3 className="text-lg font-semibold text-foreground">{achievement.title}</h3>
+                  <p className="text-sm text-muted-foreground">{achievement.organization}</p>
+                  <p className="text-sm text-muted-foreground">{achievement.description}</p>
+                </div>
+              ))}
+            </div>
           </section>
         </div>
       </main>

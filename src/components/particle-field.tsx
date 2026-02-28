@@ -62,9 +62,9 @@ const FONT: Record<string, number[][]> = {
 };
 
 const WORD = "DEVESH";
-const COLS = 7;
+const COLS = 7
 const ROWS = 9;
-const LETTER_GAP = 3;
+const LETTER_GAP = 2;
 const REPEL_R = 130;
 const REPEL_F = 0.06;
 const BG_COUNT = 100;
@@ -114,7 +114,9 @@ function bgParticles(w: number, h: number) {
 
 function spawn(w: number, h: number): Particle[] {
   const base = Math.min(w, h);
-  const gap = Math.max(7, Math.min(15, base * 0.017));
+  const totalRows = WORD.length * ROWS + (WORD.length - 1) * LETTER_GAP;
+  const maxGapForHeight = (h * 0.78) / totalRows;
+  const gap = Math.max(5, Math.min(maxGapForHeight, Math.min(13, base * 0.015)));
   const dotR = gap * 0.38;            // bigger dots for bold look
 
   const textPts = textParticles(w, h, dotR, gap);

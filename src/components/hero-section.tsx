@@ -121,21 +121,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-
-      {/* Bottom CTA */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="relative z-10 mt-16 flex flex-col items-center text-center px-4"
-      >
-        <h2 className="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-wide text-white">
-          EXPLORE MY WORK
-        </h2>
-        <p className="mt-3 max-w-xl text-sm sm:text-base md:text-lg text-muted-foreground font-body">
-          A curation of creative development, frontend coding, and design projects
-        </p>
-      </motion.div>
     </section>
   );
 }

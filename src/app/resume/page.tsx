@@ -33,9 +33,9 @@ export default function ResumePage() {
           <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent print:text-black print:bg-none">
             {devName}
           </h1>
-          <p className="text-sm mt-2 text-primary/80">AI & Full Stack Developer</p>
+          <p className="text-sm mt-2 text-primary/80">Software Engineer | Full Stack &amp; AI Developer</p>
           <div className="absolute top-0 right-0 print:hidden">
-            <a href="/resume.pdf" download="Devesh_Tiwari_Resume.pdf">
+            <a href="/devesh_resume.pdf" download="Devesh_Tiwari_Resume.pdf">
               <Button
                 variant="outline"
                 size="icon"

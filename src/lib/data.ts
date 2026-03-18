@@ -103,7 +103,7 @@ export const skills: Skill[] = [
 ];
 
 export const name: string = "Devesh Tiwari";
-export const bio: string = "Innovative Computer Science undergraduate specializing in Generative AI and Full-Stack Engineering. Experienced in building autonomous agents using LangGraph and RAG pipelines, alongside scalable web architectures with Next.js and TypeScript. Proven track record of combining technical expertise with leadership, having driven a 108% increase in community engagement as a Creative Lead. Passionate about solving complex problems at the intersection of AI and modern web development.";
+export const bio: string = "Undergraduate Computer Science student with strong foundations in software engineering, data structures, and system design. Experienced in building scalable full-stack and AI-driven applications using Java, Python, Next.js, and TypeScript. Skilled in RESTful APIs, cloud platforms, and database management, with hands-on experience in CI/CD pipelines and Agile workflows.";
 
 // ---------- Resume / shared data ----------
 
@@ -151,8 +151,22 @@ export const education: Education[] = [
     degree: 'B.E. in Computer Science',
     institution: 'Sambhram Institute of Technology',
     location: 'Bangalore, Karnataka, India',
-    period: '2023 - 2027',
-    description: 'Current CGPA: 8.8/10',
+    period: 'Aug 2023 – May 2027',
+    description: 'CGPA: 8.76/10 · No active backlogs',
+  },
+  {
+    degree: 'CBSE Class 12',
+    institution: 'DAV Academy',
+    location: 'Uttar Pradesh, India',
+    period: '2023',
+    description: 'Score: 71.4%',
+  },
+  {
+    degree: 'CBSE Class 10',
+    institution: 'Lord Buddha Public School',
+    location: 'Uttar Pradesh, India',
+    period: '2021',
+    description: 'Score: 88.0%',
   },
 ];
 
@@ -162,21 +176,21 @@ export const experience: Experience[] = [
     company: 'OSCode, SAIT Chapter · Bengaluru, IN',
     period: 'Sep 2025 – Present',
     responsibilities: [
-      'Spearheaded student outreach initiatives and digital engagement strategies, driving a 108% increase in event attendance (scaling from 120 to 250+ active participants).',
-      'Reduced administrative processing time by 80% by deploying a QR-code check-in system and automating the certificate generation pipeline.',
-      'Directed a team of creative designers to produce high-quality assets for technical workshops and hackathons, ensuring consistent brand representation.',
-      'Mentored junior members on design best practices and user experience principles, fostering a culture of innovation.',
+      'Led outreach and engagement initiatives, increasing event attendance by 108% (from 120 to 250+ participants).',
+      'Built an automated QR-based check-in and certificate generation system using Next.js and Supabase, reducing administrative effort by 80% and minimizing manual errors.',
+      'Collaborated with cross-functional teams to streamline event operations and improve workflow efficiency.',
+      'Mentored junior members on UI/UX best practices, fostering a collaborative and innovation-driven team environment.',
     ],
   },
   {
     title: 'Artificial Intelligence Intern',
     company: 'Coincent.ai · Remote',
-    period: 'June 2024 - August 2024',
+    period: 'Jun 2024 – Aug 2024',
     responsibilities: [
-      'Constructed a Text Classifier using TensorFlow and NLP techniques to accurately categorize complex datasets.',
-      'Designed and fine-tuned a Vision Transformer (ViT) architecture for image classification, outperforming standard CNN benchmarks.',
-      'Leveraged Pandas and NumPy for extensive data preprocessing, cleaning, and dimensionality reduction to optimize model training.',
-      'Visualized model performance metrics and training loss curves using Matplotlib, generating actionable insights for hyperparameter tuning.',
+      'Engineered a text classification system using TensorFlow and NLP techniques.',
+      'Designed and fine-tuned a Vision Transformer (ViT) model, improving performance over baseline CNN models by 15%.',
+      'Performed large-scale data preprocessing and feature engineering using Pandas and NumPy.',
+      'Analyzed and visualized model performance using Matplotlib.',
     ],
   },
 ];
@@ -189,6 +203,11 @@ export const certifications: Certification[] = [
     link: 'https://coursera.org/share/e32c1a6e411718423a941a935b2d6f9d',
   },
   {
+    name: 'Data Analytics & Java Development',
+    issuer: 'Vtricks Technologies',
+    date: '',
+  },
+  {
     name: 'System Design & Backend Engineering',
     issuer: 'Physics Wallah',
     date: '',
@@ -198,17 +217,14 @@ export const certifications: Certification[] = [
     issuer: 'COMED KARES',
     date: '',
   },
-  {
-    name: 'Data Analytics & Core Java Training',
-    issuer: 'Vtricks Technologies',
-    date: '',
-  },
 ];
 
 export const resumeSkills: ResumeSkillCategory[] = [
   { category: 'Languages', items: 'Java, Python, C++, JavaScript, TypeScript, SQL, HTML5, CSS3' },
   { category: 'Frameworks', items: 'Next.js, React.js, Node.js, Express.js, Spring Boot, TensorFlow, LangGraph' },
-  { category: 'Cloud & Databases', items: 'Google Cloud (Vertex AI), MongoDB, Supabase, PostgreSQL, Firebase, Docker' },
+  { category: 'Cloud & Databases', items: 'Google Cloud (Vertex AI), MongoDB, PostgreSQL, Supabase, Firebase, Docker' },
+  { category: 'Software Engineering', items: 'Data Structures & Algorithms, OOP, System Design, REST API Development, Debugging, Unit Testing' },
+  { category: 'Tools & Practices', items: 'Git, GitHub, CI/CD, Agile Methodologies, Postman' },
   { category: 'AI & Security', items: 'Generative AI, RAG Pipelines, Prompt Engineering, NLP, Penetration Testing' },
 ];
 
@@ -249,24 +265,24 @@ export const resumeProjects: ResumeProject[] = [
 export const resumeCertDetails: ResumeCertDetail[] = [
   {
     label: 'Google Cloud',
-    text: 'Prompt Design in Vertex AI and Building Real World AI Applications. Mastered LLM integration using Gemini and Imagen for scalable application development.',
+    text: 'Earned credentials in Prompt Design and Building Real-World AI Applications. Built and integrated LLM-based solutions using Gemini for scalable application development.',
     link: 'https://coursera.org/share/e32c1a6e411718423a941a935b2d6f9d',
   },
   {
     label: 'Vtricks Technologies',
-    text: 'Data Analytics (Python/Power BI), Unstructured Database Design (NoSQL), and Core Java & SQL development.',
+    text: 'Completed intensive training modules on Data Analytics, Big Data Concepts, NoSQL Database Design, and Core Java & SQL development.',
   },
   {
     label: 'Physics Wallah',
-    text: 'System Design Workshop and Backend Development (Microservices, Distributed Systems, Database Design). Certified in Ethical Hacking (Kali Linux/Nmap).',
+    text: 'Gained hands-on experience in Microservices, Distributed Systems, and Database Architecture. Separately certified in Ethical Hacking (Kali Linux/Nmap).',
   },
   {
     label: 'COMED KARES',
-    text: 'Certified in user-centric problem-solving and rapid prototyping methodologies following a comprehensive 6-month innovation cohort.',
+    text: 'Certified in user-centric problem-solving and rapid prototyping methodologies through a comprehensive 6-month innovation cohort.',
   },
   {
     label: 'Forage Simulations',
-    text: 'Wells Fargo & JPMorgan Chase (RESTful APIs, Java, Spring Boot), Goldman Sachs (Cryptography), Accenture & Walmart (DevOps, CI/CD, Agile, Data Structures).',
+    text: 'Executed technical work simulations for JPMorgan Chase and Wells Fargo (RESTful APIs, Java, Spring Boot), Goldman Sachs (cryptography), and Accenture/Walmart (DevOps, CI/CD, Agile, Data Structures).',
   },
 ];
 
@@ -279,6 +295,11 @@ export type Achievement = {
 };
 
 export const achievements: Achievement[] = [
+  {
+    title: 'Top 5000 Shortlist - EY Techathon 6.0',
+    organization: 'Ernst & Young',
+    description: 'Achieved a perfect score in the first round and secured a Top 5000 shortlist position.',
+  },
   {
     title: 'National Finalist - VOIS for Tech Innovation Marathon 2.0',
     organization: 'Edunet Foundation',

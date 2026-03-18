@@ -12,7 +12,7 @@ const ParticleField = dynamic(() => import("@/components/particle-field"), {
   ssr: false,
 });
 
-const roles = ["AI & Full Stack Developer", "Generative AI Engineer", "Full Stack Developer"];
+const roles = ["Software Engineer", "Full Stack & AI Developer", "Generative AI Engineer"];
 
 export default function HeroSection() {
   const profileImage = PlaceHolderImages.find(p => p.id === 'profile-picture');
@@ -40,7 +40,7 @@ export default function HeroSection() {
 
   return (
     <section id="about" className="relative w-full min-h-[90vh] py-12 md:py-24 lg:py-32 overflow-hidden bg-background">
-      {/* Particle Network Background — dots form "DEVESH" vertically on the left */}
+      {/* Ambient particle background */}
       <div className="absolute inset-0 w-full h-full">
         <ParticleField />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />

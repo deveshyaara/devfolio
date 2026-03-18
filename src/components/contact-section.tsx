@@ -11,7 +11,7 @@ export default function ContactSection() {
     <section id="contact" className="w-full py-12 md:py-24 lg:py-32 bg-secondary/5 relative overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20" />
 
-      <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 relative z-10">
+      <div className="container mx-auto grid items-center justify-center gap-4 px-4 text-center md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -31,7 +31,7 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="mx-auto w-full max-w-sm space-y-2 flex justify-center gap-4"
+          className="mx-auto flex w-full max-w-sm items-center justify-center gap-4"
         >
           {socialLinks.map((link) => (
             <Button

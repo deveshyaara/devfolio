@@ -103,7 +103,7 @@ export const skills: Skill[] = [
 ];
 
 export const name: string = "Devesh Tiwari";
-export const bio: string = "Undergraduate Computer Science student with strong foundations in software engineering, data structures, and system design. Experienced in building scalable full-stack and AI-driven applications using Java, Python, Next.js, and TypeScript. Skilled in RESTful APIs, cloud platforms, and database management, with hands-on experience in CI/CD pipelines and Agile workflows.";
+export const bio: string = "Undergraduate Computer Science student with strong foundations in software engineering, data structures, and system design. Experienced in building scalable full-stack and AI-driven applications using Java, Python, Next.js, and TypeScript. Skilled in RESTful APIs, cloud platforms, and database management, with hands-on experience in CI/CD pipelines and Agile workflows. Proven ability to solve complex problems and collaborate effectively, highlighted by leading initiatives that increased community engagement by 108%.";
 
 // ---------- Resume / shared data ----------
 
@@ -152,7 +152,7 @@ export const education: Education[] = [
     institution: 'Sambhram Institute of Technology',
     location: 'Bangalore, Karnataka, India',
     period: 'Aug 2023 – May 2027',
-    description: 'CGPA: 8.76/10 · No active backlogs',
+    description: 'CGPA: 8.75/10 · No active backlogs',
   },
   {
     degree: 'CBSE Class 12',
@@ -176,10 +176,21 @@ export const experience: Experience[] = [
     company: 'OSCode, SAIT Chapter · Bengaluru, IN',
     period: 'Sep 2025 – Present',
     responsibilities: [
-      'Led outreach and engagement initiatives, increasing event attendance by 108% (from 120 to 250+ participants).',
-      'Built an automated QR-based check-in and certificate generation system using Next.js and Supabase, reducing administrative effort by 80% and minimizing manual errors.',
-      'Collaborated with cross-functional teams to streamline event operations and improve workflow efficiency.',
-      'Mentored junior members on UI/UX best practices, fostering a collaborative and innovation-driven team environment.',
+      'Spearheaded outreach and engagement initiatives, increasing overall event attendance by 108% (from 120 to over 250 participants).',
+      'Engineered an automated QR-based check-in and certificate generation platform built with Next.js and Supabase, reducing administrative overhead by 80%.',
+      'Collaborated across cross-functional student teams to streamline event operations and establish efficient project workflows.',
+      'Mentored junior developers on UI/UX principles and front-end best practices to foster an innovation-driven technical environment.',
+    ],
+  },
+  {
+    title: 'Data Analyst Intern',
+    company: 'Bluestock.in · Remote',
+    period: 'Apr 2025 – May 2025',
+    responsibilities: [
+      'Architected an automated ETL pipeline using Python and Pandas to extract, clean, and load 10+ years of raw financial data into a PostgreSQL star-schema warehouse.',
+      'Created and deployed 7 interactive Power BI dashboards for rapid analysis of revenue trends, debt-to-equity ratios, and cash flows for Nifty 100 companies.',
+      'Built a multi-dimensional machine learning health scoring model using Isolation Forest and K-Means clustering for anomaly detection and sector peer matching.',
+      'Integrated a scalable Django REST API with HMAC-SHA256 authentication and Redis-backed rate limiting to securely serve financial datasets to B2B partners.',
     ],
   },
   {
@@ -187,10 +198,9 @@ export const experience: Experience[] = [
     company: 'Coincent.ai · Remote',
     period: 'Jun 2024 – Aug 2024',
     responsibilities: [
-      'Engineered a text classification system using TensorFlow and NLP techniques.',
-      'Designed and fine-tuned a Vision Transformer (ViT) model, improving performance over baseline CNN models by 15%.',
-      'Performed large-scale data preprocessing and feature engineering using Pandas and NumPy.',
-      'Analyzed and visualized model performance using Matplotlib.',
+      'Engineered a Natural Language Processing (NLP) text classification system implemented with TensorFlow.',
+      'Optimized and fine-tuned a Vision Transformer (ViT) model, improving image classification performance over baseline CNN models by 15%.',
+      'Executed large-scale data preprocessing, feature engineering, and model performance visualization leveraging Pandas, NumPy, and Matplotlib.',
     ],
   },
 ];
@@ -214,14 +224,19 @@ export const certifications: Certification[] = [
   },
   {
     name: 'Innovation & Design Thinking Program',
-    issuer: 'COMED KARES',
+    issuer: 'COMEDKares',
+    date: '',
+  },
+  {
+    name: 'Software Engineering Virtual Experience Programs',
+    issuer: 'Forage',
     date: '',
   },
 ];
 
 export const resumeSkills: ResumeSkillCategory[] = [
   { category: 'Languages', items: 'Java, Python, C++, JavaScript, TypeScript, SQL, HTML5, CSS3' },
-  { category: 'Frameworks', items: 'Next.js, React.js, Node.js, Express.js, Spring Boot, TensorFlow, LangGraph' },
+  { category: 'Frameworks & Libraries', items: 'Next.js, React.js, Node.js, Express.js, Spring Boot, TensorFlow, LangGraph' },
   { category: 'Cloud & Databases', items: 'Google Cloud (Vertex AI), MongoDB, PostgreSQL, Supabase, Firebase, Docker' },
   { category: 'Software Engineering', items: 'Data Structures & Algorithms, OOP, System Design, REST API Development, Debugging, Unit Testing' },
   { category: 'Tools & Practices', items: 'Git, GitHub, CI/CD, Agile Methodologies, Postman' },
@@ -231,7 +246,7 @@ export const resumeSkills: ResumeSkillCategory[] = [
 export const resumeProjects: ResumeProject[] = [
   {
     name: 'WealthWise - AI Finance Manager | Next.js, Supabase, Google Gemini API, Clerk',
-    description: 'Architected a full-stack financial platform utilizing Google Gemini AI for automated receipt parsing. Integrated secure authentication via Clerk and background job scheduling with Inngest, employing Recharts to visualize financial health through interactive dashboards.',
+    description: 'Architected a full-stack financial platform leveraging an advanced LLM API for automated receipt parsing. Integrated secure authentication via Clerk and background job scheduling with Inngest, employing Recharts to visualize financial health through interactive dashboards.',
     links: [
       { name: 'GitHub', url: 'https://github.com/deveshyaara/WealthWise' },
       { name: 'Live Demo', url: 'https://wealthwise.devesh.co.in/' },
@@ -277,7 +292,7 @@ export const resumeCertDetails: ResumeCertDetail[] = [
     text: 'Gained hands-on experience in Microservices, Distributed Systems, and Database Architecture. Separately certified in Ethical Hacking (Kali Linux/Nmap).',
   },
   {
-    label: 'COMED KARES',
+    label: 'COMEDKares',
     text: 'Certified in user-centric problem-solving and rapid prototyping methodologies through a comprehensive 6-month innovation cohort.',
   },
   {

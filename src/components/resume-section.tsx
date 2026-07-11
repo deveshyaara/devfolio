@@ -7,10 +7,33 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { education, experience, certifications } from '@/lib/data';
 
+// Helper to highlight key metrics and tech in experience descriptions
+const highlightKeywords = (text: string) => {
+  const keywords = [
+    '108%', '15%', '80%', '10+', '7', '120', '250',
+    'Next.js', 'Supabase', 'Python', 'Pandas', 'PostgreSQL', 
+    'Power BI', 'Isolation Forest', 'K-Means clustering', 
+    'Django REST API', 'Redis', 'HMAC-SHA256',
+    'TensorFlow', 'Vision Transformer', 'ViT', 'CNN', 
+    'NumPy', 'Matplotlib'
+  ];
+  
+  // Create a regex to match any of the keywords
+  const regex = new RegExp(`(${keywords.join('|').replace(/[+.]/g, '\\$&')})`, 'g');
+  
+  const parts = text.split(regex);
+  return parts.map((part, i) => {
+    if (keywords.includes(part)) {
+      return <span key={i} className="font-bold text-accent drop-shadow-[0_0_8px_rgba(255,0,255,0.4)]">{part}</span>;
+    }
+    return part;
+  });
+};
+
 export default function ResumeSection() {
   return (
-    <section id="resume" className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-background relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,119,198,0.1),transparent_50%)]" />
+    <section id="resume" className="pt-20 pb-12 px-4 sm:px-6 lg:px-8 w-full bg-background relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,119,198,0.05),transparent_50%)]" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -53,7 +76,7 @@ export default function ResumeSection() {
               </CardHeader>
               <CardContent className="space-y-6">
                 {education.map((edu, index) => (
-                  <div key={index} className="space-y-2 border-l-2 border-primary/20 pl-4">
+                  <div key={index} className="space-y-1.5 border-l-2 border-primary/20 pl-4">
                     <h3 className="font-semibold text-foreground font-headline">{edu.degree}</h3>
                     <p className="text-sm text-muted-foreground font-body">{edu.institution}</p>
                     <p className="text-sm text-primary font-code">{edu.period}</p>
@@ -91,40 +114,44 @@ export default function ResumeSection() {
           </motion.div>
         </div>
 
-        {/* Experience */}
+        {/* Experience - Scroll Snap Container */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
+          className="mt-8"
         >
-          <Card className="mt-8 bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary transition-colors duration-300">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 font-headline text-primary">
-                <Briefcase className="w-5 h-5" />
-                Experience
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-8">
-              {experience.map((exp, index) => (
-                <div key={index} className="space-y-3 border-l-2 border-secondary/20 pl-4">
+          <div className="flex items-center gap-2 font-headline text-primary mb-4 text-2xl font-bold px-2">
+            <Briefcase className="w-6 h-6" />
+            Experience
+          </div>
+          
+          <div className="relative h-[450px] sm:h-[400px] overflow-y-auto snap-y snap-mandatory rounded-xl border border-primary/30 shadow-[0_0_20px_rgba(0,243,255,0.1)] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-primary/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary/40">
+            {experience.map((exp, index) => (
+              <div 
+                key={index} 
+                className="snap-start snap-always min-h-full w-full flex flex-col justify-center p-6 sm:p-10 relative bg-background border-b border-primary/10 last:border-0"
+                style={{ zIndex: experience.length - index }}
+              >
+                <div className="border-l-2 border-secondary/40 pl-6 space-y-4 max-w-4xl">
                   <div>
-                    <h3 className="font-semibold text-lg text-foreground font-headline">{exp.title}</h3>
-                    <p className="text-muted-foreground font-body">{exp.company}</p>
-                    <p className="text-sm text-primary font-code">{exp.period}</p>
+                    <h3 className="font-bold text-xl sm:text-2xl text-foreground font-headline text-primary">{exp.title}</h3>
+                    <p className="text-muted-foreground font-body text-lg">{exp.company}</p>
+                    <p className="text-sm text-accent font-code mt-1">{exp.period}</p>
                   </div>
-                  <ul className="space-y-2 ml-4">
+                  <ul className="space-y-2.5">
                     {exp.responsibilities.map((resp, idx) => (
-                      <li key={idx} className="text-sm text-muted-foreground flex items-start font-body">
-                        <span className="text-primary mr-2">•</span>
-                        {resp}
+                      <li key={idx} className="text-sm sm:text-base text-muted-foreground flex items-start font-body leading-relaxed">
+                        <span className="text-secondary mr-3 mt-1.5 font-bold">•</span>
+                        <span>{highlightKeywords(resp)}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              ))}
-            </CardContent>
-          </Card>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

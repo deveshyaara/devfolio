@@ -35,6 +35,24 @@
       "description": "Screenshot of a qr-mapper for event management.",
       "imageUrl": "/project-5.png",
       "imageHint": "QR code mapping interface"
+    },
+    {
+      "id": "project-6",
+      "description": "Screenshot of an NLP Text Classifier application.",
+      "imageUrl": "/ai-showcase.jpeg",
+      "imageHint": "sentiment analysis interface"
+    },
+    {
+      "id": "project-7",
+      "description": "Screenshot of ProctorED online test platform.",
+      "imageUrl": "/proctored.jpeg",
+      "imageHint": "online examination interface"
+    },
+    {
+      "id": "project-8",
+      "description": "Screenshot of GuruOS AI-Powered Linux Desktop.",
+      "imageUrl": "/guruos.png",
+      "imageHint": "linux desktop environment"
     }
   ]
 }

@@ -162,7 +162,7 @@ export default function HeroSection() {
                   <a href="#projects">View Projects</a>
                 </Button>
                 <Button variant="outline" asChild className="rounded-full border-secondary text-secondary hover:bg-secondary/10 hover:shadow-[0_0_20px_rgba(255,0,255,0.4)] transition-all px-8 py-6 text-base font-semibold">
-                  <a href="#resume">Download Resume</a>
+                  <a href="/devesh_resume.pdf" download="Devesh_Tiwari_Resume.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
                 </Button>
               </div>
 

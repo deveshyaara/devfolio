@@ -69,6 +69,30 @@ export const projects: Project[] = [
     liveDemoUrl: 'https://qr-mapper-mu.vercel.app/',
     repoUrl: 'https://github.com/deveshyaara/qr-mapper',
   },
+  {
+    id: 'project-6',
+    title: 'NLP Text Classifier',
+    description: 'A live binary sentiment classifier trained on IMDb movie reviews using TensorFlow and TensorFlow Hub. The application features a FastAPI backend for model inference and a responsive Next.js frontend.',
+    image: 'project-6',
+    liveDemoUrl: 'https://textclassifier.devesh.co.in/',
+    repoUrl: 'https://github.com/deveshyaara/Text-Classifier/tree/main/nlp-text-classifier',
+  },
+  {
+    id: 'project-7',
+    title: 'ProctorED — Online Test Platform',
+    description: 'A professional online examination platform for tuition teachers. It allows educators to create tests, share unique test codes, and review results with built-in proctoring features. The platform ensures secure and seamless test-taking experiences.',
+    image: 'project-7',
+    liveDemoUrl: 'https://proctored.devesh.co.in/',
+    repoUrl: 'https://github.com/deveshyaara/proctor-ed',
+  },
+  {
+    id: 'project-8',
+    title: 'GuruOS — AI-Powered Linux Desktop',
+    description: 'A custom Arch Linux desktop environment built with Rust, GTK4 and Hyprland, integrating a local LLM assistant through Ollama for developer-focused, on-device assistance.',
+    image: 'project-8',
+    liveDemoUrl: '#',
+    repoUrl: '#',
+  },
 ];
 
 export const skills: Skill[] = [
@@ -273,6 +297,29 @@ export const resumeProjects: ResumeProject[] = [
     description: "Built a Transformer-based architecture for image classification on the CIFAR-10 dataset, eliminating reliance on CNNs. Incorporated advanced mechanisms including patch extraction and Multi-head Self-Attention to achieve high validation accuracy in computer vision tasks.",
     links: [
       { name: 'GitHub', url: 'https://github.com/deveshyaara/Vision-Transformer-ViT-for-Image-Classification' },
+    ],
+  },
+  {
+    name: 'NLP Text Classifier | TensorFlow, FastAPI, Next.js',
+    description: 'Built and deployed a binary sentiment classification model trained on IMDb movie reviews using TensorFlow and TensorFlow Hub. Designed a high-performance inference API with FastAPI and an interactive frontend with Next.js.',
+    links: [
+      { name: 'GitHub', url: 'https://github.com/deveshyaara/Text-Classifier/tree/main/nlp-text-classifier' },
+      { name: 'Live Demo', url: 'https://textclassifier.devesh.co.in/' },
+    ],
+  },
+  {
+    name: 'ProctorED | Online Examination Platform',
+    description: 'Developed a professional online examination platform for tuition teachers. Engineered features for test creation, unique code sharing, and secure proctoring, delivering a reliable testing environment for students.',
+    links: [
+      { name: 'GitHub', url: 'https://github.com/deveshyaara/proctor-ed' },
+      { name: 'Live Demo', url: 'https://proctored.devesh.co.in/' },
+    ],
+  },
+  {
+    name: 'GuruOS | AI-Powered Linux Desktop',
+    description: 'Developed a custom Arch Linux desktop environment built with Rust, GTK4 and Hyprland. Integrated a local LLM assistant via Ollama (Qwen2.5 3B Instruct) for developer-focused, on-device assistance.',
+    links: [
+      { name: 'GitHub', url: '#' },
     ],
   },
 ];

@@ -3,7 +3,9 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import Chatbot from '@/components/chatbot';
+import dynamic from 'next/dynamic';
+
+const Chatbot = dynamic(() => import('@/components/chatbot'));
 
 const inter = Inter({ subsets: ['latin'] });
 

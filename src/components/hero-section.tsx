@@ -57,7 +57,7 @@ export default function HeroSection() {
       </div>
 
       {/* Main Content */}
-      <div className="container relative px-4 md:px-6 z-10 pl-16 sm:pl-28 lg:pl-32 max-w-7xl mx-auto">
+      <div className="container relative px-4 md:px-6 z-10 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 items-center gap-12 lg:gap-8">
 
           {/* Profile Image with Glow */}

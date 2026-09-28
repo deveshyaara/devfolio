@@ -181,13 +181,20 @@ export default function ProjectsSection() {
           </p>
         </motion.div>
 
-        {/* 3D Perspective Grid Container */}
+        {/* Mobile View: Standard Stacked Grid (Hidden on MD and above) */}
+        <div className="flex flex-col gap-8 md:hidden relative z-20">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.id} project={project} index={i} />
+          ))}
+        </div>
+
+        {/* 3D Perspective Grid Container (Hidden on Mobile) */}
         <motion.div
           style={{
             perspective: perspective,
             transformStyle: 'preserve-3d',
           }}
-          className="relative"
+          className="relative hidden md:block"
         >
           <motion.div
             style={{

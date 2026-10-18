@@ -37,7 +37,7 @@ export default function ContactSection() {
             Get In Touch
           </h2>
           <p className="mx-auto text-muted-foreground md:text-lg font-body leading-relaxed">
-            Whether you have a project in mind, want to discuss a potential collaboration, or just want to say hi, my inbox is always open. I'll try my best to get back to you!
+            Whether you have a project in mind, want to discuss a potential collaboration, or just want to say hi, my inbox is always open. I&apos;ll try my best to get back to you!
           </p>
         </motion.div>
 

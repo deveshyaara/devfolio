@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <!-- Background & Panel Gradients -->
+    <linearGradient id="tvBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0f"/>
+      <stop offset="50%" stop-color="#12131c"/>
+      <stop offset="100%" stop-color="#07070a"/>
+    </linearGradient>
+
+    <linearGradient id="blueGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0052FF"/>
+      <stop offset="100%" stop-color="#00D2FF"/>
+    </linearGradient>
+
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1f2333"/>
+      <stop offset="100%" stop-color="#141724"/>
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0052FF"/>
+      <stop offset="50%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="24" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- TV Chassis Outer Frame -->
+  <rect x="0" y="0" width="1200" height="800" fill="url(#tvBg)" />
+
+  <!-- Ambient Blue Lighting behind TV screen -->
+  <circle cx="950" cy="220" r="280" fill="#0052FF" opacity="0.12" filter="url(#glow)"/>
+  <circle cx="250" cy="580" r="240" fill="#00D2FF" opacity="0.08" filter="url(#glow)"/>
+
+  <!-- Subtle Architectural Grid -->
+  <g stroke="#ffffff" stroke-width="1" opacity="0.04">
+    <line x1="100" y1="0" x2="100" y2="800"/>
+    <line x1="300" y1="0" x2="300" y2="800"/>
+    <line x1="600" y1="0" x2="600" y2="800"/>
+    <line x1="900" y1="0" x2="900" y2="800"/>
+    <line x1="1100" y1="0" x2="1100" y2="800"/>
+    <line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="280" x2="1200" y2="280"/>
+    <line x1="0" y1="520" x2="1200" y2="520"/>
+    <line x1="0" y1="700" x2="1200" y2="700"/>
+  </g>
+
+  <!-- Top Status / Navigation Header -->
+  <g transform="translate(60, 48)">
+    <!-- HackTV Brand -->
+    <rect x="0" y="0" width="36" height="36" rx="8" fill="url(#blueGlow)"/>
+    <text x="18" y="24" font-family="system-ui, sans-serif" font-size="20" font-weight="900" fill="#ffffff" text-anchor="middle">H</text>
+    <text x="50" y="25" font-family="'DM Sans', system-ui, sans-serif" font-size="22" font-weight="800" fill="#ffffff" letter-spacing="-0.5">HackTV</text>
+    <text x="144" y="25" font-family="'DM Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#0052FF" letter-spacing="1.5">SMART TV ECOSYSTEM</text>
+
+    <!-- TV Targets Badges -->
+    <g transform="translate(640, 2)">
+      <!-- Android TV Badge -->
+      <rect x="0" y="0" width="130" height="32" rx="16" fill="#1e2230" stroke="#2e354d" stroke-width="1"/>
+      <circle cx="16" cy="16" r="5" fill="#3DDC84"/>
+      <text x="32" y="20" font-family="'DM Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#E2E8F0">Android TV</text>
+
+      <!-- LG webOS Badge -->
+      <rect x="142" y="0" width="124" height="32" rx="16" fill="#1e2230" stroke="#2e354d" stroke-width="1"/>
+      <circle cx="158" cy="16" r="5" fill="#A50034"/>
+      <text x="174" y="20" font-family="'DM Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#E2E8F0">LG webOS</text>
+
+      <!-- React Control Center Badge -->
+      <rect x="278" y="0" width="156" height="32" rx="16" fill="#0052FF" opacity="0.15" stroke="#0052FF" stroke-width="1"/>
+      <circle cx="294" cy="16" r="5" fill="#00D2FF"/>
+      <text x="308" y="20" font-family="'DM Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#00D2FF">Control Center</text>
+    </g>
+  </g>
+
+  <!-- Main Hero Screen Banner (Mock TV Interface) -->
+  <g transform="translate(60, 116)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="1080" height="360" rx="12" fill="url(#cardGrad1)" stroke="#272b3d" stroke-width="1.5"/>
+
+    <!-- Featured Showcase Panel -->
+    <rect x="0" y="0" width="1080" height="360" rx="12" fill="url(#accentGrad)" opacity="0.15"/>
+
+    <!-- Left Hero Meta in TV Card -->
+    <g transform="translate(48, 56)">
+      <rect x="0" y="0" width="140" height="26" rx="4" fill="#0052FF"/>
+      <text x="10" y="17" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="1">4K HDR STREAM</text>
+
+      <text x="0" y="75" font-family="'DM Serif Display', Georgia, serif" font-size="44" font-weight="700" fill="#ffffff" letter-spacing="-1">Unified Media Ecosystem</text>
+      <text x="0" y="112" font-family="'DM Sans', system-ui, sans-serif" font-size="16" font-weight="400" fill="#94A3B8" width="500">
+        Cross-platform streaming orchestrator for Android TV (ExoPlayer) and LG webOS,
+      </text>
+      <text x="0" y="136" font-family="'DM Sans', system-ui, sans-serif" font-size="16" font-weight="400" fill="#94A3B8">
+        managed in real-time via React &amp; TypeScript WebSocket Control Center.
+      </text>
+
+      <!-- Control Button Mocks -->
+      <g transform="translate(0, 180)">
+        <rect x="0" y="0" width="148" height="46" rx="6" fill="#0052FF"/>
+        <text x="74" y="28" font-family="'DM Sans', system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Launch Stream</text>
+
+        <rect x="164" y="0" width="158" height="46" rx="6" fill="#1e2233" stroke="#3b4259" stroke-width="1.5"/>
+        <text x="243" y="28" font-family="'DM Sans', system-ui, sans-serif" font-size="14" font-weight="600" fill="#E2E8F0" text-anchor="middle">Control Center</text>
+      </g>
+    </g>
+
+    <!-- Right Live Status Console Graphic -->
+    <g transform="translate(710, 48)">
+      <rect x="0" y="0" width="320" height="264" rx="8" fill="#0c0e17" stroke="#1f2436" stroke-width="1.5"/>
+      <!-- Window header -->
+      <rect x="0" y="0" width="320" height="36" rx="8" fill="#141724"/>
+      <circle cx="18" cy="18" r="4.5" fill="#EF4444"/>
+      <circle cx="34" cy="18" r="4.5" fill="#F59E0B"/>
+      <circle cx="50" cy="18" r="4.5" fill="#10B981"/>
+      <text x="72" y="22" font-family="'JetBrains Mono', monospace" font-size="11" fill="#64748B">hacktv://cluster/daemon</text>
+
+      <!-- Console logs -->
+      <g transform="translate(18, 58)" font-family="'JetBrains Mono', monospace" font-size="11">
+        <text x="0" y="14" fill="#10B981">&gt; android-tv: connected</text>
+        <text x="0" y="36" fill="#64748B">  codec: H.265 / HEVC</text>
+        <text x="0" y="58" fill="#00D2FF">&gt; webos-node: synced</text>
+        <text x="0" y="80" fill="#64748B">  latency: 14ms (ws://)</text>
+        <text x="0" y="102" fill="#E2E8F0">&gt; control-center: active</text>
+        <text x="0" y="124" fill="#64748B">  state: BROADCASTING</text>
+        <text x="0" y="146" fill="#A855F7">&gt; buffer-health: 99.8%</text>
+        <text x="0" y="168" fill="#0052FF">&gt; pipeline: nominal</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Lower Row: 3 Feature Channels -->
+  <g transform="translate(60, 510)">
+    <!-- Channel 1: Android TV Core -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="338" height="230" rx="8" fill="#131521" stroke="#23283b" stroke-width="1.2"/>
+      <rect x="24" y="24" width="44" height="44" rx="8" fill="#3DDC84" opacity="0.15"/>
+      <text x="46" y="52" font-family="system-ui" font-size="22" text-anchor="middle" fill="#3DDC84">📺</text>
+      <text x="24" y="104" font-family="'DM Sans', system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">Android TV Native</text>
+      <text x="24" y="132" font-family="'DM Sans', system-ui, sans-serif" font-size="13" font-weight="400" fill="#94A3B8">
+        Built with Jetpack Compose &amp; ExoPlayer hardware-accelerated rendering.
+      </text>
+      <g transform="translate(24, 180)">
+        <text x="0" y="12" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#3DDC84">Kotlin · ExoPlayer</text>
+      </g>
+    </g>
+
+    <!-- Channel 2: LG webOS Platform -->
+    <g transform="translate(370, 0)">
+      <rect x="0" y="0" width="338" height="230" rx="8" fill="#131521" stroke="#23283b" stroke-width="1.2"/>
+      <rect x="24" y="24" width="44" height="44" rx="8" fill="#A50034" opacity="0.18"/>
+      <text x="46" y="52" font-family="system-ui" font-size="22" text-anchor="middle" fill="#E2E8F0">🌐</text>
+      <text x="24" y="104" font-family="'DM Sans', system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">LG webOS SDK</text>
+      <text x="24" y="132" font-family="'DM Sans', system-ui, sans-serif" font-size="13" font-weight="400" fill="#94A3B8">
+        Seamless TV appliance integration via Enact framework &amp; webOS Luna services.
+      </text>
+      <g transform="translate(24, 180)">
+        <text x="0" y="12" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#A50034">webOS · Luna API</text>
+      </g>
+    </g>
+
+    <!-- Channel 3: React Control Center -->
+    <g transform="translate(740, 0)">
+      <rect x="0" y="0" width="338" height="230" rx="8" fill="#131521" stroke="#0052FF" stroke-width="1.2" stroke-opacity="0.6"/>
+      <rect x="24" y="24" width="44" height="44" rx="8" fill="#0052FF" opacity="0.2"/>
+      <text x="46" y="52" font-family="system-ui" font-size="22" text-anchor="middle" fill="#00D2FF">⚡</text>
+      <text x="24" y="104" font-family="'DM Sans', system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">WebSocket Controller</text>
+      <text x="24" y="132" font-family="'DM Sans', system-ui, sans-serif" font-size="13" font-weight="400" fill="#94A3B8">
+        React &amp; TypeScript dashboard with duplex WebSocket stream dispatching.
+      </text>
+      <g transform="translate(24, 180)">
+        <text x="0" y="12" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#00D2FF">React · TypeScript</text>
+      </g>
+    </g>
+  </g>
+</svg>

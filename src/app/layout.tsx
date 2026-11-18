@@ -1,31 +1,72 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Script from 'next/script';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import dynamic from 'next/dynamic';
-
-const Chatbot = dynamic(() => import('@/components/chatbot'));
-
-const inter = Inter({ subsets: ['latin'] });
+import Script from 'next/script';
+import ClientOnlyComponents from '@/components/client-only';
 
 export const metadata: Metadata = {
-  title: 'Developer Portfolio',
-  description: 'A modern, minimalistic developer portfolio.',
+  title: 'Devesh Tiwari — Software Engineer',
+  description:
+    'Software Engineer specializing in backend systems, full-stack products, AI/ML applications, Smart TV ecosystems and intelligent developer tools.',
+  openGraph: {
+    title: 'Devesh Tiwari — Software Engineer',
+    description:
+      'Building scalable software systems, full-stack products, AI-powered applications and intelligent developer tools.',
+    url: 'https://devesh.co.in',
+    type: 'website',
+  },
+};
+
+const FAVICON_SVG =
+  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0a0a'/><text x='50%25' y='50%25' dy='0.34em' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-weight='800' font-size='20' fill='%23ffffff'>D</text></svg>";
+
+const PERSON_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Devesh Tiwari',
+  url: 'https://devesh.co.in',
+  jobTitle: 'Software Engineer',
+  description:
+    'Computer Science and Engineering student building scalable software systems, full-stack products, AI-powered applications, and intelligent developer tools.',
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Sambhram Institute of Technology',
+  },
+  worksFor: {
+    '@type': 'Organization',
+    name: 'AlgoUniversity',
+  },
+  sameAs: [
+    'https://github.com/deveshyaara',
+    'https://www.linkedin.com/in/deveshcodes/',
+  ],
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className={inter.className}>
+    <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="icon" type="image/svg+xml" href={FAVICON_SVG} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
+        />
+      </head>
+      <body
+        style={{
+          fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+          backgroundColor: '#ECECEC',
+          color: '#0A0A0A',
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        <ClientOnlyComponents />
         {children}
         <Toaster />
-        <Chatbot />
-        
+
         {process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID && (
           <Script
             id="adsbygoogle-init"

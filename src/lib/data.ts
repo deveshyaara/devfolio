@@ -12,8 +12,8 @@ type Project = {
     title: string;
     description: string;
     image: string;
-    liveDemoUrl: string;
-    repoUrl: string;
+    liveDemoUrl?: string;
+    repoUrl?: string;
 };
 
 type Skill = {
@@ -23,19 +23,27 @@ type Skill = {
 
 export const socialLinks: SocialLink[] = [
   { name: 'GitHub', url: 'https://github.com/deveshyaara', icon: Github },
-  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/deveshcodes', icon: Linkedin },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/deveshcodes/', icon: Linkedin },
   { name: 'Instagram', url: 'https://www.instagram.com/devesh_yaara_', icon: Instagram },
   { name: 'Gmail', url: 'mailto:tiwaridewesh234@gmail.com', icon: Mail }
 ];
 
 export const projects: Project[] = [
   {
+    id: 'project-hacktv',
+    title: 'HackTV — Smart TV Ecosystem',
+    description: 'Smart TV ecosystem featuring Android TV, LG webOS and a React/TypeScript Control Center. Built with Jetpack Compose, ExoPlayer, webOS Luna services, and duplex WebSocket streaming for seamless cross-platform TV media management and hardware-accelerated playback.',
+    image: 'project-hacktv',
+    liveDemoUrl: 'https://github.com/deveshyaara',
+    repoUrl: 'https://github.com/deveshyaara',
+  },
+  {
     id: 'project-1',
     title: 'E-Commerce Platform-Backend',
     description: 'This project provides a RESTful API for managing e-commerce operations such as user authentication, category management, product management, and cart functionality. It is built using Node.js, Express.js, and MongoDB, and includes features like JWT-based authentication, CRUD operations for categories and products, and cart management with quantity updates.',
     image: 'project-1',
     liveDemoUrl: 'https://documenter.getpostman.com/view/34764585/2sA3JQ3yun',
-    repoUrl: 'https://github.com/deveshyaara/E-Commerce-Backend.git',
+    repoUrl: 'https://github.com/deveshyaara/E-Commerce-Backend',
   },
   {
     id: 'project-2',
@@ -51,7 +59,7 @@ export const projects: Project[] = [
     description: 'Devfolio is a personal portfolio website that displays a developer’s projects, technical skills, certifications, and contact information. It serves as an interactive online resume, allowing visitors to view detailed overviews of completed work, technology expertise, and ways to connect or collaborate.',
     image: 'project-3',
     liveDemoUrl: 'https://devfolio-taupe.vercel.app/',
-    repoUrl: 'https://github.com/deveshyaara/devfolio.git',
+    repoUrl: 'https://github.com/deveshyaara/devfolio',
   },
   {
     id: 'project-4',
@@ -59,7 +67,7 @@ export const projects: Project[] = [
     description: 'HealthLink is a decentralized health records management system built on the Ethereum blockchain. It allows patients to securely store and share their medical records with healthcare providers, ensuring data integrity and privacy through blockchain technology. The platform includes features for record creation, access control, and audit trails.',
     image: 'project-4',
     liveDemoUrl: 'https://healthlink.devesh.co.in/',
-    repoUrl: 'https://github.com/deveshyaara/Healthlink_RPC.git',
+    repoUrl: 'https://github.com/deveshyaara/Healthlink_RPC',
   },
   {
     id: 'project-5',
@@ -67,7 +75,7 @@ export const projects: Project[] = [
     description: 'A staff-facing QR mapping tool that links pre-printed badge QR codes to dynamic event ticket URLs. Staff scan a badge then scan the attendee\'s QR ticket to create a mapping in Supabase. When attendees later scan their own badge, they are instantly redirected to their ticket page. Built with Next.js 16 (App Router, TypeScript), Supabase (PostgreSQL), Tailwind CSS v4, and @yudiel/react-qr-scanner for camera-based scanning.',
     image: 'project-5',
     liveDemoUrl: 'https://qr-mapper-mu.vercel.app/',
-    repoUrl: 'https://github.com/deveshyaara/qr-mapper',
+    repoUrl: 'https://github.com/deveshyaara/QR-Mapper',
   },
   {
     id: 'project-6',
@@ -90,8 +98,6 @@ export const projects: Project[] = [
     title: 'GuruOS — AI-Powered Linux Desktop',
     description: 'A custom Arch Linux desktop environment built with Rust, GTK4 and Hyprland, integrating a local LLM assistant through Ollama for developer-focused, on-device assistance.',
     image: 'project-8',
-    liveDemoUrl: '#',
-    repoUrl: '#',
   },
 ];
 
@@ -127,7 +133,7 @@ export const skills: Skill[] = [
 ];
 
 export const name: string = "Devesh Tiwari";
-export const bio: string = "Undergraduate Computer Science student with strong foundations in software engineering, data structures, and system design. Experienced in building scalable full-stack and AI-driven applications using Java, Python, Next.js, and TypeScript. Skilled in RESTful APIs, cloud platforms, and database management, with hands-on experience in CI/CD pipelines and Agile workflows. Proven ability to solve complex problems and collaborate effectively, highlighted by leading initiatives that increased community engagement by 108%.";
+export const bio: string = "Undergraduate Computer Science student with strong foundations in software engineering, data structures, and system design. Experienced in building scalable full-stack and AI-driven applications using Java, Python, Next.js, and TypeScript. Skilled in RESTful APIs, cloud platforms, and database management, with hands-on experience in CI/CD pipelines and Agile workflows. Proven ability to solve complex problems and collaborate effectively, highlighted by having led community initiatives that increased event attendance by 108%.";
 
 // ---------- Resume / shared data ----------
 
@@ -172,11 +178,11 @@ export type ResumeCertDetail = {
 
 export const education: Education[] = [
   {
-    degree: 'B.E. in Computer Science',
+    degree: 'B.E. in Computer Science & Engineering',
     institution: 'Sambhram Institute of Technology',
     location: 'Bangalore, Karnataka, India',
     period: 'Aug 2023 – May 2027',
-    description: 'CGPA: 8.75/10 · No active backlogs',
+    description: 'CGPA: 8.76/10 · No active backlogs',
   },
   {
     degree: 'CBSE Class 12',
@@ -196,14 +202,24 @@ export const education: Education[] = [
 
 export const experience: Experience[] = [
   {
-    title: 'Creative Team Lead',
-    company: 'OSCode, SAIT Chapter · Bengaluru, IN',
-    period: 'Sep 2025 – Present',
+    title: 'SDE / Teaching Assistant Intern',
+    company: 'AlgoUniversity · Bengaluru, IN',
+    period: 'Nov 2026 – Present',
     responsibilities: [
-      'Spearheaded outreach and engagement initiatives, increasing overall event attendance by 108% (from 120 to over 250 participants).',
-      'Engineered an automated QR-based check-in and certificate generation platform built with Next.js and Supabase, reducing administrative overhead by 80%.',
+      'Mentoring undergraduate and graduate engineering students on Data Structures, Algorithms, and System Design fundamentals.',
+      'Performing rigorous technical code reviews and debugging scalable full-stack software architectures.',
+      'Designing test suites and curriculum benchmarks for engineering problem-solving tracks.',
+    ],
+  },
+  {
+    title: 'Creative Lead',
+    company: 'OSCode, SAIT Chapter',
+    period: 'September 2025 – September 2026',
+    responsibilities: [
+      'Spearheaded outreach and engagement initiatives over a one-year tenure, increasing overall event attendance by 108% (from ~120 to 250+ participants).',
+      'Engineered an automated QR-based check-in and certificate generation platform built with Next.js and Supabase, reducing administrative effort by ~80%.',
       'Collaborated across cross-functional student teams to streamline event operations and establish efficient project workflows.',
-      'Mentored junior developers on UI/UX principles and front-end best practices to foster an innovation-driven technical environment.',
+      'Mentored junior developers on UI/UX principles and front-end best practices during the tenure.',
     ],
   },
   {
@@ -269,6 +285,13 @@ export const resumeSkills: ResumeSkillCategory[] = [
 
 export const resumeProjects: ResumeProject[] = [
   {
+    name: 'HackTV: Smart TV Media Ecosystem | Android TV, LG webOS, React, TypeScript, Node.js, WebSockets',
+    description: 'Engineered a cross-platform Smart TV ecosystem spanning Android TV (Jetpack Compose & ExoPlayer) and LG webOS (Enact framework & Luna services). Built a centralized React and TypeScript Control Center with real-time WebSocket communication to orchestrate multi-device playback, media synchronisation, and remote hardware-accelerated streaming.',
+    links: [
+      { name: 'GitHub', url: 'https://github.com/deveshyaara' },
+    ],
+  },
+  {
     name: 'WealthWise - AI Finance Manager | Next.js, Supabase, Google Gemini API, Clerk',
     description: 'Architected a full-stack financial platform leveraging an advanced LLM API for automated receipt parsing. Integrated secure authentication via Clerk and background job scheduling with Inngest, employing Recharts to visualize financial health through interactive dashboards.',
     links: [
@@ -280,13 +303,13 @@ export const resumeProjects: ResumeProject[] = [
     name: 'E-Commerce Backend API | Node.js, Express, MongoDB, JWT',
     description: 'Developed a scalable RESTful API supporting secure JWT-based authentication and role-based access control. Structured optimized MongoDB schemas for product inventory and cart management, with comprehensive endpoint documentation maintained in Postman.',
     links: [
-      { name: 'GitHub', url: 'https://github.com/deveshyaara/E-Commerce-Backend.git' },
+      { name: 'GitHub', url: 'https://github.com/deveshyaara/E-Commerce-Backend' },
       { name: 'Postman Docs', url: 'https://documenter.getpostman.com/view/34764585/2sA3JQ3yun' },
     ],
   },
   {
-    name: 'DevFolio: AI-Integrated Portfolio Platform | Next.js 15, TypeScript, LangGraph, Google Gemini, RAG',
-    description: 'Launched a responsive developer portfolio using Next.js 15 and TypeScript, featuring an embedded autonomous AI agent. Engineered the agent\'s core using LangGraph and a RAG pipeline with FAISS to semantically index GitHub repositories, ensuring real-time data synchronization.',
+    name: 'DevFolio: AI-Integrated Portfolio Platform | Next.js 16, TypeScript, LangGraph, Google Gemini, RAG',
+    description: 'Launched a responsive developer portfolio using Next.js and TypeScript, featuring an embedded autonomous AI agent. Engineered the agent\'s core using LangGraph and a RAG pipeline with FAISS to semantically index GitHub repositories, ensuring real-time data synchronization.',
     links: [
       { name: 'GitHub', url: 'https://github.com/deveshyaara/devfolio' },
       { name: 'Live Demo', url: 'https://devfolio-taupe.vercel.app/' },
@@ -296,7 +319,7 @@ export const resumeProjects: ResumeProject[] = [
     name: 'Vision Transformer (ViT) Implementation | TensorFlow, Deep Learning, Python',
     description: "Built a Transformer-based architecture for image classification on the CIFAR-10 dataset, eliminating reliance on CNNs. Incorporated advanced mechanisms including patch extraction and Multi-head Self-Attention to achieve high validation accuracy in computer vision tasks.",
     links: [
-      { name: 'GitHub', url: 'https://github.com/deveshyaara/Vision-Transformer-ViT-for-Image-Classification' },
+      { name: 'GitHub', url: 'https://github.com/deveshyaara/-Vision-Transformer-ViT-' },
     ],
   },
   {
@@ -318,9 +341,7 @@ export const resumeProjects: ResumeProject[] = [
   {
     name: 'GuruOS | AI-Powered Linux Desktop',
     description: 'Developed a custom Arch Linux desktop environment built with Rust, GTK4 and Hyprland. Integrated a local LLM assistant via Ollama (Qwen2.5 3B Instruct) for developer-focused, on-device assistance.',
-    links: [
-      { name: 'GitHub', url: '#' },
-    ],
+    links: [],
   },
 ];
 

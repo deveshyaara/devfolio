@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <rect width="1200" height="800" fill="#E8E8E4"/>
+  <!-- Architectural 6-column grid -->
+  <g stroke="#0A0A0A" stroke-opacity="0.08" stroke-width="1">
+    <line x1="200" y1="0" x2="200" y2="800"/>
+    <line x1="400" y1="0" x2="400" y2="800"/>
+    <line x1="600" y1="0" x2="600" y2="800"/>
+    <line x1="800" y1="0" x2="800" y2="800"/>
+    <line x1="1000" y1="0" x2="1000" y2="800"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>
+
+  <text x="80" y="96" font-family="ui-monospace, monospace" font-size="13" fill="#0052FF" letter-spacing="2">SYSTEM ARCHITECTURE · HACKTV ECOSYSTEM</text>
+  <text x="80" y="148" font-family="system-ui, sans-serif" font-size="42" font-weight="600" fill="#0A0A0A" letter-spacing="-1">Cross-Platform Smart TV Topology</text>
+
+  <!-- Center Orchestrator -->
+  <rect x="430" y="250" width="340" height="170" fill="#0A0A0A"/>
+  <rect x="430" y="250" width="340" height="6" fill="#0052FF"/>
+  <text x="458" y="294" font-family="ui-monospace, monospace" font-size="11" fill="#60A5FA" letter-spacing="1.5">CORE ORCHESTRATION ENGINE</text>
+  <text x="458" y="330" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#FFFFFF">Node.js API + WS Hub</text>
+  <text x="458" y="362" font-family="ui-monospace, monospace" font-size="12" fill="#9CA3AF">· REST Metadata &amp; Catalog API</text>
+  <text x="458" y="384" font-family="ui-monospace, monospace" font-size="12" fill="#9CA3AF">· Duplex WebSocket State Sync</text>
+  <text x="458" y="406" font-family="ui-monospace, monospace" font-size="12" fill="#9CA3AF">· Multi-Device Session Registry</text>
+
+  <!-- Connector Lines -->
+  <g stroke="#0052FF" stroke-width="2" fill="none">
+    <path d="M 430 335 L 330 335 L 330 520"/>
+    <path d="M 600 420 L 600 520"/>
+    <path d="M 770 335 L 870 335 L 870 520"/>
+  </g>
+  <circle cx="330" cy="520" r="5" fill="#0052FF"/>
+  <circle cx="600" cy="520" r="5" fill="#0052FF"/>
+  <circle cx="870" cy="520" r="5" fill="#0052FF"/>
+
+  <!-- Node 1: Android TV -->
+  <rect x="80" y="520" width="320" height="200" fill="#FFFFFF" stroke="#0A0A0A" stroke-opacity="0.16"/>
+  <rect x="80" y="520" width="12" height="12" fill="#0052FF"/>
+  <text x="108" y="560" font-family="ui-monospace, monospace" font-size="11" fill="#6B7280">CLIENT 01 · TV OS</text>
+  <text x="108" y="596" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#0A0A0A">Android TV App</text>
+  <text x="108" y="632" font-family="system-ui, sans-serif" font-size="13" fill="#4B5563">Jetpack Compose TV UI + ExoPlayer</text>
+  <text x="108" y="654" font-family="system-ui, sans-serif" font-size="13" fill="#4B5563">D-pad focus navigation &amp; hardware</text>
+  <text x="108" y="676" font-family="system-ui, sans-serif" font-size="13" fill="#4B5563">accelerated media playback.</text>
+
+  <!-- Node 2: LG webOS -->
+  <rect x="440" y="520" width="320" height="200" fill="#FFFFFF" stroke="#0A0A0A" stroke-opacity="0.16"/>
+  <rect x="440" y="520" width="12" height="12" fill="#0052FF"/>
+  <text x="468" y="560" font-family="ui-monospace, monospace" font-size="11" fill="#6B7280">CLIENT 02 · SMART TV</text>
+  <text x="468" y="596" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#0A0A0A">LG webOS App</text>
+  <text x="468" y="632" font-family="system-ui, sans-serif" font-size="13" fill="#4B5563">webOS SDK &amp; Luna service bus</text>
+  <text x="468" y="654" font-family="system-ui, sans-serif" font-size="13" fill="#4B5563">Magic Remote spatial controls &amp;</text>
+  <text x="468" y="676" font-family="system-ui, sans-serif" font-size="13" fill="#4B5563">native webOS video pipeline.</text>
+
+  <!-- Node 3: React Control Center -->
+  <rect x="800" y="520" width="320" height="200" fill="#FFFFFF" stroke="#0A0A0A" stroke-opacity="0.16"/>
+  <rect x="800" y="520" width="12" height="12" fill="#0052FF"/>
+  <text x="828" y="560" font-family="ui-monospace, monospace" font-size="11" fill="#6B7280">CLIENT 03 · WEB DECK</text>
+  <text x="828" y="596" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#0A0A0A">React Control Center</text>
+  <text x="828" y="632" font-family="system-ui, sans-serif" font-size="13" fill="#4B5563">React + TypeScript web dashboard</text>
+  <text x="828" y="654" font-family="system-ui, sans-serif" font-size="13" fill="#4B5563">Remote queue management, device</text>
+  <text x="828" y="676" font-family="system-ui, sans-serif" font-size="13" fill="#4B5563">telemetry &amp; instant state sync.</text>
+</svg>

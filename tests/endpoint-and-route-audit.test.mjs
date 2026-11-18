@@ -254,6 +254,38 @@ describe('DevFolio Complete Endpoint, Route & Data QA Suite', () => {
     }
   });
 
+  it('enforces immutable static asset caching, font preloading, and canonical SEO metadata', async () => {
+    const fontRes = await fetch(`${BASE}/assets/fonts/gyByhwUxId8gMEwcGFWNOITd.woff2`, {
+      method: 'HEAD',
+    });
+    assert.equal(fontRes.status, 200);
+    assert.match(fontRes.headers.get('cache-control') || '', /max-age=31536000.*immutable/i);
+
+    const pdfRes = await fetch(`${BASE}/devesh_resume.pdf`, { method: 'HEAD' });
+    assert.equal(pdfRes.status, 200);
+    assert.match(pdfRes.headers.get('cache-control') || '', /max-age=86400/i);
+
+    const homeHtml = await (await fetch(`${BASE}/`)).text();
+    assert.ok(
+      homeHtml.includes('rel="canonical" href="https://devesh.co.in"'),
+      'Homepage missing canonical link'
+    );
+    assert.ok(
+      homeHtml.includes('rel="preload" href="/assets/fonts/gyByhwUxId8gMEwcGFWNOITd.woff2"'),
+      'Homepage missing primary Geist font preload'
+    );
+
+    const resumeHtml = await (await fetch(`${BASE}/resume`)).text();
+    assert.ok(
+      resumeHtml.includes('rel="canonical" href="https://devesh.co.in/resume"'),
+      '/resume missing canonical link'
+    );
+    assert.ok(
+      resumeHtml.includes('<title>Resume — Devesh Tiwari</title>'),
+      '/resume missing route-specific title metadata'
+    );
+  });
+
   it('handles 24 concurrent read requests reliably without errors', async () => {
     const targets = ['/', '/resume', '/robots.txt', '/sitemap.xml', '/devesh_resume.pdf', '/ads.txt'];
     const t0 = performance.now();

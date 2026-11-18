@@ -1,8 +1,7 @@
-'use client';
-
-import { useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import profilePhoto from '../../public/profile-photo.jpg';
+import SectionRevealObserver from '@/components/section-reveal-observer';
 
 const HEADLINE_WORDS =
   'Engineering scalable systems, full-stack products, and AI tools that ship.'.split(' ');
@@ -65,39 +64,19 @@ const EXPERIENCE = [
 ];
 
 export default function StoikAbout() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [wordsReady, setWordsReady] = useState(false);
-  const [cardsReady, setCardsReady] = useState(false);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setWordsReady(true);
-            window.setTimeout(() => setCardsReady(true), 420);
-            io.disconnect();
-            break;
-          }
-        }
-      },
-      { threshold: 0.18 }
-    );
-
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       id="about"
-      className={`w-full py-24 md:py-36 ${wordsReady ? 'stoik-about-words-ready' : ''}`}
+      className="w-full py-24 md:py-36"
       style={{ backgroundColor: '#ECECEC' }}
     >
+      <SectionRevealObserver
+        targetId="about"
+        readyClass="stoik-about-words-ready"
+        delayedClass="stoik-about-cards-ready"
+        delayMs={380}
+        threshold={0.16}
+      />
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 md:px-12">
         {/* Top Tag — rotating electric-blue square + label */}
         <div className="flex items-center gap-3 mb-10">
@@ -132,10 +111,8 @@ export default function StoikAbout() {
           {STAT_CARDS.map((stat, i) => (
             <div
               key={stat.value}
-              className="stoik-chamfer relative bg-white border border-black/10 p-6 md:p-7 min-h-[172px] flex flex-col justify-between transition-all duration-500"
+              className="stoik-chamfer stoik-about-stat-card relative bg-white border border-black/10 p-6 md:p-7 min-h-[172px] flex flex-col justify-between"
               style={{
-                opacity: cardsReady ? 1 : 0,
-                transform: cardsReady ? 'translateY(0)' : 'translateY(28px)',
                 transitionDelay: `${i * 120}ms`,
               }}
             >
@@ -148,7 +125,7 @@ export default function StoikAbout() {
                 </span>
                 <span
                   className="stoik-rot-square mt-1"
-                  style={{ '--stoik-rot-delay': stat.delay } as React.CSSProperties}
+                  style={{ '--stoik-rot-delay': stat.delay } as CSSProperties}
                   aria-hidden="true"
                 />
               </div>
@@ -219,7 +196,7 @@ export default function StoikAbout() {
                 <div className="flex items-center gap-2.5">
                   <span
                     className="stoik-rot-square"
-                    style={{ '--stoik-rot-delay': '1.2s' } as React.CSSProperties}
+                    style={{ '--stoik-rot-delay': '1.2s' } as CSSProperties}
                     aria-hidden="true"
                   />
                   <span className="text-label text-[#0A0A0A]">Experience</span>

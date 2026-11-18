@@ -1,8 +1,5 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
-import { Check, Copy } from 'lucide-react';
+import CopyEmailButton from '@/components/copy-email-button';
 
 const EMAIL = 'tiwaridewesh234@gmail.com';
 
@@ -10,35 +7,10 @@ const EMAIL = 'tiwaridewesh234@gmail.com';
  * StoikContact — Faithful replication of the reference's panoramic sky footer
  * (`.stoik-footer` from `ysuriadesign/index.html`) using an original pure CSS/SVG
  * daylight sky & cumulus horizon (zero copied raster photography) and Devesh Tiwari's
- * verified contact channels.
+ * verified contact channels. Rendered as a React Server Component with a minimal
+ * client island for the Copy Email button.
  */
 export default function StoikContact() {
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
-
-  const handleCopy = async () => {
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(EMAIL);
-      } else {
-        const textarea = document.createElement('textarea');
-        textarea.value = EMAIL;
-        textarea.setAttribute('readonly', '');
-        textarea.style.position = 'fixed';
-        textarea.style.left = '-9999px';
-        document.body.appendChild(textarea);
-        textarea.select();
-        const ok = document.execCommand('copy');
-        document.body.removeChild(textarea);
-        if (!ok) throw new Error('execCommand copy failed');
-      }
-      setCopyState('copied');
-      window.setTimeout(() => setCopyState('idle'), 2200);
-    } catch {
-      setCopyState('failed');
-      window.setTimeout(() => setCopyState('idle'), 2600);
-    }
-  };
-
   return (
     <footer
       id="contact"
@@ -151,25 +123,7 @@ export default function StoikContact() {
                 </svg>
               </a>
 
-              <button
-                type="button"
-                onClick={handleCopy}
-                aria-live="polite"
-                className="stoik-chamfer inline-flex items-center gap-2 bg-white/80 hover:bg-white border border-black/15 text-[#0A0A0A] px-4 py-3.5 text-[12.5px] font-mono transition-colors cursor-pointer"
-              >
-                {copyState === 'copied' ? (
-                  <Check size={14} className="text-emerald-600" />
-                ) : (
-                  <Copy size={14} />
-                )}
-                <span>
-                  {copyState === 'copied'
-                    ? 'Copied'
-                    : copyState === 'failed'
-                      ? 'Copy unavailable'
-                      : 'Copy email'}
-                </span>
-              </button>
+              <CopyEmailButton email={EMAIL} />
             </div>
 
             <div className="flex flex-wrap items-center gap-5 pt-1 text-[13px] font-medium text-black/75">

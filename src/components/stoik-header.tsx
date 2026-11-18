@@ -4,7 +4,6 @@ import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import profilePhoto from '../../public/profile-photo.jpg';
 
 const SCRAMBLE_CHARS =
@@ -301,48 +300,47 @@ export default function StoikHeader() {
         </div>
       </aside>
 
-      {/* Mobile full-screen drawer */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="mobile-nav"
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[95] flex flex-col pt-20 px-6 pb-28"
-            style={{ backgroundColor: '#ECECEC' }}
+      {/* Mobile full-screen drawer (pure GPU CSS transition — zero framer-motion bundle) */}
+      <div
+        aria-hidden={!open}
+        className={`fixed inset-0 z-[95] flex flex-col pt-20 px-6 pb-28 transition-all duration-200 ease-out md:hidden ${
+          open
+            ? 'opacity-100 translate-y-0 pointer-events-auto'
+            : 'opacity-0 -translate-y-4 pointer-events-none'
+        }`}
+        style={{ backgroundColor: '#ECECEC' }}
+      >
+        <nav className="flex flex-col gap-6 mt-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              tabIndex={open ? 0 : -1}
+              onClick={() => setOpen(false)}
+              className="text-3xl font-medium tracking-[-0.03em] text-[#0A0A0A] border-b border-black/10 pb-3"
+            >
+              {link.name}
+            </Link>
+          ))}
+          <Link
+            href="/resume"
+            tabIndex={open ? 0 : -1}
+            onClick={() => setOpen(false)}
+            className="text-3xl font-medium tracking-[-0.03em] text-[#0052FF] border-b border-black/10 pb-3"
           >
-            <nav className="flex flex-col gap-6 mt-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="text-3xl font-medium tracking-[-0.03em] text-[#0A0A0A] border-b border-black/10 pb-3"
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <Link
-                href="/resume"
-                onClick={() => setOpen(false)}
-                className="text-3xl font-medium tracking-[-0.03em] text-[#0052FF] border-b border-black/10 pb-3"
-              >
-                Resume →
-              </Link>
-              <a
-                href="/devesh_resume.pdf"
-                download="Devesh_Tiwari_Resume.pdf"
-                onClick={() => setOpen(false)}
-                className="stoik-chamfer inline-flex items-center justify-center px-6 py-3.5 text-sm font-medium bg-[#0A0A0A] text-white w-fit mt-2"
-              >
-                Download PDF Resume ↓
-              </a>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Resume →
+          </Link>
+          <a
+            href="/devesh_resume.pdf"
+            download="Devesh_Tiwari_Resume.pdf"
+            tabIndex={open ? 0 : -1}
+            onClick={() => setOpen(false)}
+            className="stoik-chamfer inline-flex items-center justify-center px-6 py-3.5 text-sm font-medium bg-[#0A0A0A] text-white w-fit mt-2"
+          >
+            Download PDF Resume ↓
+          </a>
+        </nav>
+      </div>
     </>
   );
 }

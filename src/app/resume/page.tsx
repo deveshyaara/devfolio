@@ -1,7 +1,5 @@
-'use client';
-
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import {
   ArrowDownToLine,
   ArrowLeft,
@@ -25,6 +23,22 @@ import {
   resumeCertDetails,
   achievements,
 } from '@/lib/data';
+
+export const metadata: Metadata = {
+  title: 'Resume — Devesh Tiwari',
+  description:
+    'Online resume of Devesh Tiwari — Software Engineer (Backend, Full-Stack, AI/ML). Education, verified experience, shipped engineering projects, certifications, and PDF CV download.',
+  alternates: {
+    canonical: '/resume',
+  },
+  openGraph: {
+    title: 'Resume — Devesh Tiwari',
+    description:
+      'Software Engineer specializing in backend systems, full-stack web products, and applied AI/ML.',
+    url: '/resume',
+    type: 'profile',
+  },
+};
 
 export default function ResumePage() {
   return (
@@ -56,15 +70,14 @@ export default function ResumePage() {
             Software Engineer | Backend · Full-Stack · AI/ML
           </p>
           <div className="absolute top-0 right-0 print:hidden">
-            <a href="/devesh_resume.pdf" download="Devesh_Tiwari_Resume.pdf">
-              <Button
-                variant="outline"
-                size="icon"
-                className="bg-white hover:bg-[#0052FF]/10 border-black/15"
-              >
-                <ArrowDownToLine className="h-4 w-4 text-[#0A0A0A]" />
-                <span className="sr-only">Download PDF</span>
-              </Button>
+            <a
+              href="/devesh_resume.pdf"
+              download="Devesh_Tiwari_Resume.pdf"
+              aria-label="Download PDF"
+              className="inline-flex items-center justify-center h-10 w-10 bg-white hover:bg-[#0052FF]/10 border border-black/15 transition-colors"
+            >
+              <ArrowDownToLine className="h-4 w-4 text-[#0A0A0A]" />
+              <span className="sr-only">Download PDF</span>
             </a>
           </div>
           <div className="mt-4 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-sm text-black/65 print:text-black">

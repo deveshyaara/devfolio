@@ -1,19 +1,33 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Toaster } from '@/components/ui/toaster';
 import Script from 'next/script';
 import ClientOnlyComponents from '@/components/client-only';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://devesh.co.in'),
   title: 'Devesh Tiwari — Software Engineer',
   description:
     'Software Engineer specializing in backend systems, full-stack products, AI/ML applications, Smart TV ecosystems and intelligent developer tools.',
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: 'Devesh Tiwari — Software Engineer',
     description:
       'Building scalable software systems, full-stack products, AI-powered applications and intelligent developer tools.',
     url: 'https://devesh.co.in',
+    siteName: 'Devesh Tiwari',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Devesh Tiwari — Software Engineer',
+    description:
+      'Backend · Full-Stack · AI/ML — scalable software systems, AI applications, and intelligent developer tools.',
   },
 };
 
@@ -49,6 +63,13 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <link rel="icon" type="image/svg+xml" href={FAVICON_SVG} />
+        <link
+          rel="preload"
+          href="/assets/fonts/gyByhwUxId8gMEwcGFWNOITd.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
@@ -65,7 +86,6 @@ export default function RootLayout({
       >
         <ClientOnlyComponents />
         {children}
-        <Toaster />
 
         {process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID && (
           <Script

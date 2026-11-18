@@ -9,68 +9,56 @@ const TOTAL_PIXELS = 8;
  * Dismisses once the Spline 3D scene signals readiness or after a crisp cap.
  */
 export default function StoikPreloader() {
-  const [progress, setProgress] = useState(0.08);
+  const [filledCount, setFilledCount] = useState(1);
   const [fading, setFading] = useState(false);
   const [removed, setRemoved] = useState(false);
 
   useEffect(() => {
     let dismissed = false;
-    let current = 0.08;
-    let target = 0.25;
-    let rafId = 0;
+    let fadeTimer = 0;
+    let removeTimer = 0;
 
     const finish = () => {
       if (dismissed) return;
       dismissed = true;
-      target = 1;
-      setProgress(1);
-      window.setTimeout(() => {
+      setFilledCount(TOTAL_PIXELS);
+      fadeTimer = window.setTimeout(() => {
         setFading(true);
-        window.setTimeout(() => setRemoved(true), 600);
-      }, 180);
+        removeTimer = window.setTimeout(() => setRemoved(true), 420);
+      }, 100);
     };
 
-    const tick = () => {
-      if (dismissed) return;
-      if (current < target) {
-        current = Math.min(target, current + 0.032);
-        setProgress(current);
-      }
-      rafId = requestAnimationFrame(tick);
-    };
-    rafId = requestAnimationFrame(tick);
-
-    const onSplineReady = () => {
-      target = 1;
-      window.setTimeout(finish, 180);
-    };
-    window.addEventListener('stoik:spline-ready', onSplineReady, { once: true });
-
-    const start = performance.now();
-    const crawl = window.setInterval(() => {
+    // Crisp stepped pixel progression (max 8 state updates instead of 60fps re-renders)
+    const isMobile = window.innerWidth < 810;
+    const stepMs = isMobile ? 55 : 105;
+    let step = 1;
+    const stepper = window.setInterval(() => {
       if (dismissed) {
-        window.clearInterval(crawl);
+        window.clearInterval(stepper);
         return;
       }
-      const elapsed = (performance.now() - start) / 1400;
-      target = Math.max(target, Math.min(0.94, 0.1 + elapsed * 0.84));
-    }, 60);
+      step = Math.min(TOTAL_PIXELS - 1, step + 1);
+      setFilledCount(step);
+    }, stepMs);
 
-    // Crisp cap so visitors never wait unnecessarily (mobile skips Spline too)
-    const capMs = window.innerWidth < 810 ? 750 : 1650;
-    const capTimer = window.setTimeout(finish, capMs);
+    const onSplineReady = () => finish();
+    window.addEventListener('stoik:spline-ready', onSplineReady, { once: true });
+
+    // Fast cap so LCP / FCP are never needlessly delayed
+    const capTimer = window.setTimeout(finish, isMobile ? 420 : 900);
 
     return () => {
-      cancelAnimationFrame(rafId);
-      window.clearInterval(crawl);
+      window.clearInterval(stepper);
       window.clearTimeout(capTimer);
+      window.clearTimeout(fadeTimer);
+      window.clearTimeout(removeTimer);
       window.removeEventListener('stoik:spline-ready', onSplineReady);
     };
   }, []);
 
   if (removed) return null;
 
-  const filledCount = Math.min(TOTAL_PIXELS, Math.round(progress * TOTAL_PIXELS));
+  const percent = Math.round((filledCount / TOTAL_PIXELS) * 100);
 
   return (
     <div id="stoik-loader" className={fading ? 'is-out' : ''} aria-hidden="true">
@@ -84,7 +72,7 @@ export default function StoikPreloader() {
             />
           ))}
         </div>
-        <div className="stoik-loader-percent">{Math.round(progress * 100)}%</div>
+        <div className="stoik-loader-percent">{percent}%</div>
       </div>
     </div>
   );

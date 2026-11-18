@@ -1,6 +1,4 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import SectionRevealObserver from '@/components/section-reveal-observer';
 
 const ACHIEVEMENTS = [
   {
@@ -46,6 +44,7 @@ export default function StoikApproach() {
       className="w-full py-24 md:py-36"
       style={{ backgroundColor: '#E5E5E5' }}
     >
+      <SectionRevealObserver targetId="approach" readyClass="stoik-approach-ready" threshold={0.12} />
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 md:px-12">
         {/* Top Tag + Giant Display Heading */}
         <div className="flex items-center gap-3 mb-4">
@@ -69,13 +68,7 @@ export default function StoikApproach() {
         {/* Exact Reference Equal 2-Column White Chamfered Cards (.stoik-process-two-boxes) */}
         <div className="grid md:grid-cols-2 gap-5 md:gap-7 items-stretch">
           {/* Card 1: Approach 1 — Traditional */}
-          <motion.article
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="stoik-chamfer bg-white border border-black/10 p-6 sm:p-8 flex flex-col justify-between gap-5 min-h-[420px]"
-          >
+          <article className="stoik-chamfer stoik-approach-card bg-white border border-black/10 p-6 sm:p-8 flex flex-col justify-between gap-5 min-h-[420px]">
             <div className="flex flex-col gap-4">
               <span className="inline-flex items-center justify-center w-fit px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] border border-black/15 text-black/70 bg-white">
                 Approach 1
@@ -142,15 +135,12 @@ export default function StoikApproach() {
                 DSA · OOP · Architecture · Testing
               </span>
             </div>
-          </motion.article>
+          </article>
 
           {/* Card 2: Approach 2 — Just bring it */}
-          <motion.article
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.65, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-            className="stoik-chamfer bg-white border border-black/10 p-6 sm:p-8 flex flex-col justify-between gap-5 min-h-[420px]"
+          <article
+            className="stoik-chamfer stoik-approach-card bg-white border border-black/10 p-6 sm:p-8 flex flex-col justify-between gap-5 min-h-[420px]"
+            style={{ transitionDelay: '120ms' }}
           >
             <div className="flex flex-col gap-4">
               <span className="inline-flex items-center justify-center w-fit px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] border border-black/15 text-black/70 bg-white">
@@ -190,7 +180,7 @@ export default function StoikApproach() {
                 High-Cadence Execution · Zero-to-One
               </span>
             </div>
-          </motion.article>
+          </article>
         </div>
 
         {/* Verified Achievements & Certifications Row */}

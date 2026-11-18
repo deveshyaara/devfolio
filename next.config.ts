@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     cpus: 1,
     agentUpgrade: 'security',
   },
+  compress: true,
   async headers() {
     return [
       {
@@ -20,9 +21,29 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: '/assets/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/devesh_resume.pdf',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
+          },
+        ],
+      },
     ];
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: 'https',

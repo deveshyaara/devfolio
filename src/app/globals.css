@@ -457,6 +457,24 @@
   filter: blur(0);
   transform: translateY(0);
 }
+.stoik-about-stat-card {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 500ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stoik-about-cards-ready .stoik-about-stat-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stoik-approach-card {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 620ms ease, transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stoik-approach-ready .stoik-approach-card {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* ── Project Card Draggable Peek Carousel + Circular Blue DRAG Cursor ── */
 .stoik-pcar-slide {
@@ -707,7 +725,9 @@
   .stoik-pbox-spectrum span {
     animation: none !important;
   }
-  .stoik-about-word {
+  .stoik-about-word,
+  .stoik-about-stat-card,
+  .stoik-approach-card {
     opacity: 1 !important;
     filter: none !important;
     transform: none !important;

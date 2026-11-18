@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { MessageSquare } from 'lucide-react';
 import { Button } from './ui/button';
-import ChatbotCard from './chatbot-card';
+
+const ChatbotCard = dynamic(() => import('./chatbot-card'), { ssr: false });
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,12 +1,5 @@
-'use client';
-
-import { useRef } from 'react';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
-
-const SplineScene = dynamic(() => import('@/components/spline-scene'), {
-  ssr: false,
-});
+import HeroSplineMount from '@/components/hero-spline-mount';
 
 type ReelCardItem = {
   id: string;
@@ -108,11 +101,8 @@ const PROOF_TICKER: ProofTickerItem[] = [
 ];
 
 export default function StoikHero() {
-  const heroRef = useRef<HTMLElement | null>(null);
-
   return (
     <section
-      ref={heroRef}
       id="hero"
       className="relative w-full min-h-[100svh] h-[100svh] overflow-hidden flex flex-col justify-between"
       style={{ backgroundColor: '#E1E1E1' }}
@@ -172,7 +162,7 @@ export default function StoikHero() {
       </div>
 
       {/* ORIGINAL 3D Spline Neoclassical Marble Philosopher Sculpture (z-index: 8) */}
-      <SplineScene heroRef={heroRef} />
+      <HeroSplineMount />
 
       {/* Dual-Row Opposing Breathing Project Reels BEHIND the 3D Sculpture (z-index: 4) */}
       <div className="stoik-carousel-overlay" aria-label="Featured projects preview reel">
@@ -187,7 +177,7 @@ export default function StoikHero() {
                   fill
                   sizes="(max-width: 809px) 220px, 330px"
                   className="object-cover"
-                  priority={idx < 4}
+                  priority={idx < 2}
                 />
                 <div
                   className="absolute inset-x-0 bottom-0 px-3 py-2 flex items-center justify-between"

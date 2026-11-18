@@ -33,7 +33,7 @@ export default function ChatbotCard({ onClose }: ChatbotCardProps) {
     <div
       role="dialog"
       aria-label="Chat with my AI Agent"
-      className="fixed bottom-[176px] md:bottom-[5.25rem] right-4 sm:right-7 z-[95] flex flex-col
+      className="fixed bottom-[176px] md:bottom-[5.25rem] right-4 sm:right-7 z-[108] flex flex-col
                  w-[calc(100vw-2rem)] sm:w-96
                  h-[62vh] md:h-[70vh] max-h-[600px]
                  rounded-xl overflow-hidden

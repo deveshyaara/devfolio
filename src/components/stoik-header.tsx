@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import profilePhoto from '../../public/profile-photo.jpg';
 
 const SCRAMBLE_CHARS =
   '!@#%^&*<>?/|~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -243,9 +244,9 @@ export default function StoikHeader() {
       >
         <div className="stoik-hero-card-inner">
           {/* Devesh's OWN square portrait */}
-          <div className="relative w-[76px] h-[76px] sm:w-[88px] sm:h-[88px] flex-shrink-0 bg-[#0A0A0A] overflow-hidden">
+          <div className="relative w-[76px] h-[76px] sm:w-[88px] sm:h-[88px] flex-shrink-0 bg-[#0038D0] overflow-hidden">
             <Image
-              src="/profile-photo.jpg"
+              src={profilePhoto}
               alt="Devesh Tiwari"
               fill
               priority
@@ -266,7 +267,9 @@ export default function StoikHeader() {
 
             <div className="flex items-center gap-1.5 mt-2 flex-wrap">
               <a
-                href="mailto:tiwaridewesh234@gmail.com?subject=Engineering%20Inquiry"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=tiwaridewesh234@gmail.com&su=Engineering%20Inquiry"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="stoik-cta-button"
               >
                 <span>Mail me</span>

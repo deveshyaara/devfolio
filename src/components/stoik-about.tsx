@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import profilePhoto from '../../public/profile-photo.jpg';
 
 const HEADLINE_WORDS =
   'Engineering scalable systems, full-stack products, and AI tools that ship.'.split(' ');
@@ -162,9 +163,9 @@ export default function StoikAbout() {
         <div className="grid lg:grid-cols-[0.88fr_1.12fr] gap-12 lg:gap-16 items-start">
           {/* Left: Portrait + Education Facts */}
           <div className="flex flex-col gap-6">
-            <div className="stoik-chamfer-lg relative w-full aspect-[4/4.6] overflow-hidden bg-[#D9D9D6] border border-black/10">
+            <div className="stoik-chamfer-lg relative w-full aspect-[4/4.6] overflow-hidden bg-[#0038D0] border border-black/10">
               <Image
-                src="/profile-photo.jpg"
+                src={profilePhoto}
                 alt="Devesh Tiwari — Software Engineer"
                 fill
                 sizes="(max-width: 1024px) 100vw, 44vw"

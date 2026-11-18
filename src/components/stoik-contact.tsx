@@ -130,7 +130,9 @@ export default function StoikContact() {
 
             <div className="flex flex-wrap items-center gap-3">
               <a
-                href={`mailto:${EMAIL}?subject=Engineering%20Opportunity`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL)}&su=Engineering%20Opportunity`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="stoik-chamfer inline-flex items-center gap-2.5 bg-[#0A0A0A] hover:bg-[#0052FF] text-white px-6 py-3.5 text-[13px] font-semibold tracking-[0.02em] transition-colors"
               >
                 <span>Mail me</span>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -131,98 +131,288 @@ const MORE_PROJECTS: MoreProject[] = [
 
 function PeekCarousel({
   project,
-  onCursorActive,
+  onCursorState,
 }: {
   project: FeaturedCaseStudy;
-  onCursorActive: (active: boolean) => void;
+  onCursorState: (visible: boolean, dragging?: boolean, clientX?: number, clientY?: number) => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [translateX, setTranslateX] = useState(0);
-  const [animate, setAnimate] = useState(true);
-
-  const dragState = useRef({
-    dragging: false,
-    startX: 0,
-    currentX: 0,
-  });
+  const activeIdxRef = useRef(0);
 
   const slideCount = project.slides.length;
 
-  const computeTranslateForIdx = (idx: number) => {
+  // All high-frequency drag + spring physics live strictly in refs (0 React re-renders per frame)
+  const physicsRef = useRef({
+    dragging: false,
+    pointerId: -1,
+    startPointerX: 0,
+    startOffsetX: 0,
+    posX: 0,
+    targetX: 0,
+    velX: 0,
+    minX: 0,
+    maxX: 0,
+    slideWidth: 1,
+    slideOffsets: [0] as number[],
+    samples: [] as { x: number; t: number }[],
+    rafId: 0,
+    lastFrameTime: 0,
+    wheelAccum: 0,
+    wheelResetTimer: 0,
+  });
+
+  const applyTransform = useCallback((x: number) => {
+    const track = trackRef.current;
+    if (track) {
+      track.style.transform = `translate3d(${x.toFixed(2)}px, 0, 0)`;
+    }
+  }, []);
+
+  const stopLoop = useCallback(() => {
+    const p = physicsRef.current;
+    if (p.rafId) {
+      cancelAnimationFrame(p.rafId);
+      p.rafId = 0;
+    }
+  }, []);
+
+  const startSpring = useCallback(() => {
+    const p = physicsRef.current;
+    if (p.rafId) return;
+    p.lastFrameTime = performance.now();
+
+    const step = (now: number) => {
+      if (p.dragging) {
+        p.rafId = 0;
+        return;
+      }
+      const dt = Math.min(0.05, Math.max(0.001, (now - p.lastFrameTime) / 1000));
+      p.lastFrameTime = now;
+
+      // Critically-damped spring: smooth, responsive, uninterrupted deceleration into target slide
+      const stiffness = 175;
+      const damping = 24;
+      const displacement = p.targetX - p.posX;
+      const accel = stiffness * displacement - damping * p.velX;
+      p.velX += accel * dt;
+      p.posX += p.velX * dt;
+
+      if (Math.abs(p.targetX - p.posX) < 0.3 && Math.abs(p.velX) < 2) {
+        p.posX = p.targetX;
+        p.velX = 0;
+        applyTransform(p.posX);
+        p.rafId = 0;
+        return;
+      }
+
+      applyTransform(p.posX);
+      p.rafId = requestAnimationFrame(step);
+    };
+
+    p.rafId = requestAnimationFrame(step);
+  }, [applyTransform]);
+
+  const measureGeometry = useCallback(() => {
     const el = containerRef.current;
-    if (!el) return 0;
+    if (!el) return;
     const w = el.offsetWidth;
+    if (w <= 0) return;
+
     const isMobile = window.innerWidth <= 809;
     const peek = isMobile ? 1 : 0.7;
     const sW = w * peek;
     const trackW = slideCount * sW;
-    if (trackW <= w) return 0;
-    const centered = w * 0.5 - (idx + 0.5) * sW;
-    const min = -(trackW - w);
+    const min = trackW <= w ? 0 : -(trackW - w);
     const max = 0;
-    return Math.max(min, Math.min(max, centered));
-  };
 
-  const snapTo = (newIdx: number) => {
-    const clamped = Math.max(0, Math.min(slideCount - 1, newIdx));
-    setActiveIdx(clamped);
-    const nextX = computeTranslateForIdx(clamped);
-    dragState.current.currentX = nextX;
-    setAnimate(true);
-    setTranslateX(nextX);
-  };
+    const offsets: number[] = [];
+    for (let i = 0; i < slideCount; i++) {
+      const centered = trackW <= w ? 0 : w * 0.5 - (i + 0.5) * sW;
+      offsets.push(Math.max(min, Math.min(max, centered)));
+    }
+
+    const p = physicsRef.current;
+    p.slideOffsets = offsets;
+    p.slideWidth = Math.max(1, sW);
+    p.minX = min;
+    p.maxX = max;
+
+    if (!p.dragging && !p.rafId) {
+      const snapped = offsets[activeIdxRef.current] ?? 0;
+      p.posX = snapped;
+      p.targetX = snapped;
+      p.velX = 0;
+      applyTransform(snapped);
+    }
+  }, [applyTransform, slideCount]);
 
   useEffect(() => {
-    const onResize = () => {
-      const nextX = computeTranslateForIdx(activeIdx);
-      dragState.current.currentX = nextX;
-      setAnimate(false);
-      setTranslateX(nextX);
+    const p = physicsRef.current;
+    measureGeometry();
+    const el = containerRef.current;
+    const ro =
+      typeof ResizeObserver !== 'undefined' && el
+        ? new ResizeObserver(() => measureGeometry())
+        : null;
+    if (ro && el) ro.observe(el);
+    window.addEventListener('resize', measureGeometry, { passive: true });
+    return () => {
+      ro?.disconnect();
+      window.removeEventListener('resize', measureGeometry);
+      if (p.wheelResetTimer) window.clearTimeout(p.wheelResetTimer);
+      stopLoop();
     };
-    onResize();
-    window.addEventListener('resize', onResize, { passive: true });
-    return () => window.removeEventListener('resize', onResize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeIdx, slideCount]);
+  }, [measureGeometry, stopLoop]);
+
+  const snapTo = useCallback(
+    (newIdx: number, initialVel = 0) => {
+      const clamped = Math.max(0, Math.min(slideCount - 1, newIdx));
+      if (activeIdxRef.current !== clamped) {
+        activeIdxRef.current = clamped;
+        setActiveIdx(clamped);
+      }
+      const p = physicsRef.current;
+      p.targetX = p.slideOffsets[clamped] ?? 0;
+      if (initialVel !== 0) {
+        p.velX = initialVel;
+      }
+      startSpring();
+    },
+    [slideCount, startSpring]
+  );
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
     if ((e.target as HTMLElement).closest('a, button')) return;
     try {
       e.currentTarget.setPointerCapture(e.pointerId);
     } catch {
       // ignore
     }
-    dragState.current.dragging = true;
-    dragState.current.startX = e.clientX - dragState.current.currentX;
-    setAnimate(false);
+
+    const p = physicsRef.current;
+    stopLoop();
+    p.dragging = true;
+    p.pointerId = e.pointerId;
+    p.startPointerX = e.clientX;
+    p.startOffsetX = p.posX;
+    p.targetX = p.posX;
+    p.velX = 0;
+    p.samples = [{ x: e.clientX, t: performance.now() }];
+    onCursorState(true, true, e.clientX, e.clientY);
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragState.current.dragging) return;
-    let x = e.clientX - dragState.current.startX;
-    const min = computeTranslateForIdx(slideCount - 1);
-    const max = computeTranslateForIdx(0);
-    if (x > max) x = max + (x - max) * 0.35;
-    if (x < min) x = min + (x - min) * 0.35;
-    dragState.current.currentX = x;
-    setTranslateX(x);
+    const p = physicsRef.current;
+    if (!p.dragging) {
+      const overInteractive = Boolean((e.target as HTMLElement).closest('a, button'));
+      onCursorState(!overInteractive, false, e.clientX, e.clientY);
+      return;
+    }
+
+    const now = performance.now();
+    p.samples.push({ x: e.clientX, t: now });
+    // Keep last ~90ms of pointer samples for clean, jitter-free flick velocity
+    while (p.samples.length > 2 && now - p.samples[0].t > 90) {
+      p.samples.shift();
+    }
+
+    let rawX = p.startOffsetX + (e.clientX - p.startPointerX);
+    if (rawX > p.maxX) rawX = p.maxX + (rawX - p.maxX) * 0.28;
+    if (rawX < p.minX) rawX = p.minX + (rawX - p.minX) * 0.28;
+
+    // 1:1 instant zero-lag GPU transform while actively dragging
+    p.posX = rawX;
+    p.targetX = rawX;
+    applyTransform(rawX);
   };
 
-  const handlePointerUp = () => {
-    if (!dragState.current.dragging) return;
-    dragState.current.dragging = false;
-    let best = 0;
-    let bestDist = Infinity;
-    for (let i = 0; i < slideCount; i++) {
-      const d = Math.abs(computeTranslateForIdx(i) - dragState.current.currentX);
-      if (d < bestDist) {
-        bestDist = d;
-        best = i;
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    const p = physicsRef.current;
+    if (!p.dragging) return;
+    p.dragging = false;
+
+    try {
+      if (p.pointerId !== -1 && e.currentTarget.hasPointerCapture(p.pointerId)) {
+        e.currentTarget.releasePointerCapture(p.pointerId);
+      }
+    } catch {
+      // ignore
+    }
+    p.pointerId = -1;
+
+    const totalDx = e.clientX - p.startPointerX;
+    const now = performance.now();
+
+    // Compute clean average velocity across recent 90ms sample window
+    let releaseVel = 0;
+    if (p.samples.length >= 2) {
+      const first = p.samples[0];
+      const last = p.samples[p.samples.length - 1];
+      const spanMs = last.t - first.t;
+      const idleMs = now - last.t;
+      if (spanMs > 4 && idleMs < 110) {
+        releaseVel = ((last.x - first.x) / spanMs) * 1000;
+        releaseVel = Math.max(-2400, Math.min(2400, releaseVel));
       }
     }
-    snapTo(best);
+
+    let targetIdx = activeIdxRef.current;
+
+    if (Math.abs(totalDx) < 6 && slideCount > 1) {
+      // Quick click on left/right peeking edge smoothly navigates to adjacent slide
+      const rect = containerRef.current?.getBoundingClientRect();
+      if (rect) {
+        const relX = (e.clientX - rect.left) / rect.width;
+        if (relX > 0.68 && targetIdx < slideCount - 1) targetIdx += 1;
+        else if (relX < 0.32 && targetIdx > 0) targetIdx -= 1;
+      }
+    } else {
+      // Advance/rewind cleanly on modest drag (>16% of slide) OR brisk flick (>240px/s)
+      const dragThreshold = p.slideWidth * 0.16;
+      if (totalDx < -dragThreshold || releaseVel < -240) {
+        targetIdx = Math.min(slideCount - 1, activeIdxRef.current + 1);
+      } else if (totalDx > dragThreshold || releaseVel > 240) {
+        targetIdx = Math.max(0, activeIdxRef.current - 1);
+      } else {
+        // Fallback: closest slide to momentum-projected position
+        const projected = p.posX + releaseVel * 0.14;
+        let bestDist = Infinity;
+        for (let i = 0; i < p.slideOffsets.length; i++) {
+          const d = Math.abs(p.slideOffsets[i] - projected);
+          if (d < bestDist) {
+            bestDist = d;
+            targetIdx = i;
+          }
+        }
+      }
+    }
+
+    const overInteractive = Boolean((e.target as HTMLElement).closest('a, button'));
+    onCursorState(!overInteractive, false, e.clientX, e.clientY);
+    snapTo(targetIdx, releaseVel);
+  };
+
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (slideCount <= 1) return;
+    // Support horizontal trackpad swipe without hijacking vertical page scroll
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || Math.abs(e.deltaX) < 6) return;
+    const p = physicsRef.current;
+    p.wheelAccum += e.deltaX;
+    if (p.wheelResetTimer) window.clearTimeout(p.wheelResetTimer);
+    p.wheelResetTimer = window.setTimeout(() => {
+      p.wheelAccum = 0;
+    }, 180);
+
+    if (p.wheelAccum > 55) {
+      p.wheelAccum = 0;
+      snapTo(activeIdxRef.current + 1);
+    } else if (p.wheelAccum < -55) {
+      p.wheelAccum = 0;
+      snapTo(activeIdxRef.current - 1);
+    }
   };
 
   return (
@@ -232,18 +422,21 @@ function PeekCarousel({
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
-      onMouseEnter={() => onCursorActive(true)}
-      onMouseLeave={() => onCursorActive(false)}
+      onWheel={handleWheel}
+      onMouseEnter={(e) => onCursorState(true, false, e.clientX, e.clientY)}
+      onMouseLeave={() => {
+        if (!physicsRef.current.dragging) {
+          onCursorState(false, false);
+        }
+      }}
+      style={{ contain: 'layout style paint' }}
       className="relative w-full h-full overflow-hidden bg-[#0A0A0C] select-none touch-pan-y md:cursor-none"
     >
-      {/* Track */}
+      {/* Track (1:1 GPU transform while dragging + critically-damped rAF spring on release) */}
       <div
         ref={trackRef}
         className="flex h-full will-change-transform"
-        style={{
-          transform: `translate3d(${translateX}px, 0, 0)`,
-          transition: animate ? 'transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1)' : 'none',
-        }}
+        style={{ transform: 'translate3d(0px, 0, 0)' }}
       >
         {project.slides.map((slide, i) => (
           <div
@@ -265,7 +458,7 @@ function PeekCarousel({
       {/* Top-left slide counter + flagship badge */}
       <div className="absolute top-4 left-4 z-[6] flex items-center gap-2 pointer-events-none">
         {project.flagship && <span className="tag-blue">Flagship</span>}
-        <span className="px-2.5 py-1 bg-black/75 backdrop-blur-md text-white font-mono text-[10px] tracking-[0.1em] uppercase">
+        <span className="px-2.5 py-1 bg-black/85 text-white font-mono text-[10px] tracking-[0.1em] uppercase">
           0{activeIdx + 1} / 0{slideCount}
         </span>
       </div>
@@ -294,13 +487,11 @@ function PeekCarousel({
         </div>
       )}
 
-      {/* Dark Translucent Bottom Info Panel (mirrors .stoik-project-info from reference index.html) */}
+      {/* Dark Bottom Info Panel (solid near-opaque surface avoids expensive per-frame GPU blur over sliding track) */}
       <div
         className="absolute inset-x-0 bottom-0 z-[6] grid md:grid-cols-[1.05fr_1.45fr] gap-3 md:gap-8 p-4 sm:p-5 md:px-7 md:py-5 text-white"
         style={{
-          background: 'rgba(10, 10, 10, 0.92)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
+          background: 'rgba(10, 10, 10, 0.94)',
         }}
       >
         <div className="flex flex-col gap-2.5">
@@ -355,11 +546,68 @@ export default function StoikProjects() {
   const stackWrapperRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const dragCursorRef = useRef<HTMLDivElement>(null);
-  const [cursorOn, setCursorOn] = useState(false);
 
-  // Scroll-driven sticky 3D-tilt card animation (exact port of setupProjectCardTilt from stoik.js)
+  // Zero-React-re-render cursor state: position & classes mutate DOM directly on rAF
+  const cursorRef = useRef({
+    x: -100,
+    y: -100,
+    visible: false,
+    dragging: false,
+    rafId: 0,
+  });
+
+  const flushCursor = useCallback(() => {
+    const c = cursorRef.current;
+    c.rafId = 0;
+    const el = dragCursorRef.current;
+    if (el) {
+      el.style.transform = `translate3d(${c.x - 36}px, ${c.y - 36}px, 0)`;
+    }
+  }, []);
+
+  const scheduleCursor = useCallback(() => {
+    const c = cursorRef.current;
+    if (!c.rafId) {
+      c.rafId = requestAnimationFrame(flushCursor);
+    }
+  }, [flushCursor]);
+
+  const handleCursorState = useCallback(
+    (visible: boolean, dragging = false, clientX?: number, clientY?: number) => {
+      const c = cursorRef.current;
+      const el = dragCursorRef.current;
+
+      if (typeof clientX === 'number' && typeof clientY === 'number') {
+        c.x = clientX;
+        c.y = clientY;
+        if (visible && el && !c.visible) {
+          // Snap position immediately before fading in so cursor never flies across screen
+          el.style.transform = `translate3d(${c.x - 36}px, ${c.y - 36}px, 0)`;
+        }
+      }
+
+      if (c.visible !== visible) {
+        c.visible = visible;
+        el?.classList.toggle('is-on', visible);
+      }
+      if (c.dragging !== dragging) {
+        c.dragging = dragging;
+        el?.classList.toggle('is-dragging', dragging);
+      }
+
+      if (visible) {
+        scheduleCursor();
+      }
+    },
+    [scheduleCursor]
+  );
+
+  // Scroll-driven sticky 3D-tilt card animation batched via rAF (exact port of setupProjectCardTilt)
   useEffect(() => {
-    const onScroll = () => {
+    let scrollRaf = 0;
+
+    const updateTilt = () => {
+      scrollRaf = 0;
       const wrapper = stackWrapperRef.current;
       if (!wrapper) return;
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
@@ -399,45 +647,69 @@ export default function StoikProjects() {
       }
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    onScroll();
+    const scheduleTilt = () => {
+      if (!scrollRaf) {
+        scrollRaf = requestAnimationFrame(updateTilt);
+      }
+    };
+
+    window.addEventListener('scroll', scheduleTilt, { passive: true });
+    window.addEventListener('resize', scheduleTilt, { passive: true });
+    updateTilt();
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      window.removeEventListener('scroll', scheduleTilt);
+      window.removeEventListener('resize', scheduleTilt);
     };
   }, []);
 
-  // Follow pointer for circular electric-blue DRAG cursor
+  // Zero-lag rAF-batched pointer tracking for DRAG cursor (only active while hovering a card)
   useEffect(() => {
+    const c = cursorRef.current;
     const move = (e: PointerEvent) => {
-      const el = dragCursorRef.current;
-      if (!el) return;
-      el.style.transform = `translate3d(${e.clientX - 36}px, ${e.clientY - 36}px, 0)`;
+      c.x = e.clientX;
+      c.y = e.clientY;
+      if (c.visible) {
+        scheduleCursor();
+      }
     };
     window.addEventListener('pointermove', move, { passive: true });
-    return () => window.removeEventListener('pointermove', move);
-  }, []);
+    return () => {
+      window.removeEventListener('pointermove', move);
+      if (c.rafId) {
+        cancelAnimationFrame(c.rafId);
+        c.rafId = 0;
+      }
+    };
+  }, [scheduleCursor]);
 
   return (
     <section id="projects" className="w-full py-20 md:py-32" style={{ backgroundColor: '#E5E5E5' }}>
-      {/* Circular Electric-Blue DRAG Cursor (exact reference .stoik-drag-cursor) */}
-      <div
-        ref={dragCursorRef}
-        className={`stoik-drag-cursor ${cursorOn ? 'is-on' : ''}`}
-        aria-hidden="true"
-      >
-        <svg className="w-3 h-3 block flex-shrink-0" viewBox="0 0 14 14" aria-hidden="true">
-          <path
-            d="M9 3 L5 7 L9 11"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        <span className="leading-none">DRAG</span>
+      {/* Circular Electric-Blue DRAG Cursor (zero React re-renders, GPU-composited inner scale) */}
+      <div ref={dragCursorRef} className="stoik-drag-cursor" aria-hidden="true">
+        <div className="stoik-drag-cursor-inner">
+          <svg className="w-2.5 h-2.5 block flex-shrink-0" viewBox="0 0 14 14" aria-hidden="true">
+            <path
+              d="M9 3 L5 7 L9 11"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.9"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className="leading-none">DRAG</span>
+          <svg className="w-2.5 h-2.5 block flex-shrink-0" viewBox="0 0 14 14" aria-hidden="true">
+            <path
+              d="M5 3 L9 7 L5 11"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.9"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
       </div>
 
       {/* Giant Section Display Heading (mirrors "Work" in reference) */}
@@ -489,7 +761,7 @@ export default function StoikProjects() {
             }}
           >
             <div className="w-full h-full overflow-hidden border border-black/15 shadow-[0_24px_64px_rgba(0,0,0,0.12)] stoik-chamfer-lg">
-              <PeekCarousel project={project} onCursorActive={setCursorOn} />
+              <PeekCarousel project={project} onCursorState={handleCursorState} />
             </div>
           </div>
         ))}

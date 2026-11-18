@@ -14,12 +14,28 @@ export default function CursorGlow() {
     const el = ref.current;
     if (!el) return;
 
-    const move = (e: MouseEvent) => {
-      el.style.transform = `translate(${e.clientX - 200}px, ${e.clientY - 200}px)`;
+    let rafId = 0;
+    let nextX = -400;
+    let nextY = -400;
+
+    const flush = () => {
+      rafId = 0;
+      el.style.transform = `translate3d(${nextX - 200}px, ${nextY - 200}px, 0)`;
     };
 
-    window.addEventListener('mousemove', move, { passive: true });
-    return () => window.removeEventListener('mousemove', move);
+    const move = (e: PointerEvent) => {
+      nextX = e.clientX;
+      nextY = e.clientY;
+      if (!rafId) {
+        rafId = requestAnimationFrame(flush);
+      }
+    };
+
+    window.addEventListener('pointermove', move, { passive: true });
+    return () => {
+      window.removeEventListener('pointermove', move);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
@@ -35,9 +51,9 @@ export default function CursorGlow() {
         height: 400,
         borderRadius: '50%',
         background:
-          'radial-gradient(circle, rgba(0,82,255,0.055) 0%, transparent 65%)',
-        zIndex: 9999,
-        mixBlendMode: 'multiply',
+          'radial-gradient(circle, rgba(0,82,255,0.045) 0%, transparent 65%)',
+        zIndex: 40,
+        transform: 'translate3d(-400px, -400px, 0)',
         willChange: 'transform',
       }}
     />

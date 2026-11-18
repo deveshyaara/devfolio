@@ -134,10 +134,23 @@ export default function SplineScene({ heroRef }: SplineSceneProps) {
       document.head.appendChild(script);
     }
 
+    let heroVisible = true;
+    const heroEl = heroRef.current;
+    const heroObserver =
+      typeof IntersectionObserver !== 'undefined' && heroEl
+        ? new IntersectionObserver(
+            (entries) => {
+              heroVisible = entries[0]?.isIntersecting ?? true;
+            },
+            { threshold: 0.01 }
+          )
+        : null;
+    if (heroObserver && heroEl) heroObserver.observe(heroEl);
+
     // Forward window-level mousemove/pointermove inside hero bounds to Spline canvas
     // (mirrors setupGlobalSplineCursorForward in reference stoik.js)
     const forwardCursor = (e: MouseEvent) => {
-      if (!viewerEl) return;
+      if (!viewerEl || !heroVisible) return;
       const hero = heroRef.current;
       if (hero) {
         const hr = hero.getBoundingClientRect();
@@ -178,6 +191,7 @@ export default function SplineScene({ heroRef }: SplineSceneProps) {
 
     return () => {
       cancelled = true;
+      heroObserver?.disconnect();
       if (logoInterval) window.clearInterval(logoInterval);
       window.removeEventListener('mousemove', forwardCursor, true);
       window.removeEventListener('pointermove', forwardCursor, true);

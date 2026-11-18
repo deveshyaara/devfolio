@@ -147,7 +147,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Devesh Tiwari**
 - GitHub: [@deveshyaara](https://github.com/deveshyaara)
-- LinkedIn: [deveshcodes](https://www.linkedin.com/in/deveshcodes)
+- LinkedIn: [deveshcodes](https://www.linkedin.com/in/deveshcodes/)
 - Email: tiwaridewesh234@gmail.com
 - Portfolio: [https://devfolio-taupe.vercel.app/](https://devfolio-taupe.vercel.app/)
 

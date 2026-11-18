@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "project-hacktv",
+      "description": "Smart TV ecosystem featuring Android TV, LG webOS and React Control Center.",
+      "imageUrl": "/hacktv.svg",
+      "imageHint": "smart tv interface"
+    },
+    {
       "id": "profile-picture",
       "description": "A portrait of the developer.",
       "imageUrl": "/profile-photo.jpg",

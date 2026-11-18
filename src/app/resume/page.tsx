@@ -1,8 +1,10 @@
 'use client';
 
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import {
   ArrowDownToLine,
+  ArrowLeft,
   Github,
   Linkedin,
   Mail,
@@ -26,40 +28,59 @@ import {
 
 export default function ResumePage() {
   return (
-    <div className="flex flex-col items-center min-h-screen bg-background text-foreground p-4 sm:p-6 lg:p-8">
-      <main className="w-full max-w-5xl bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl shadow-lg p-8 sm:p-12 print:shadow-none print:border-none print:bg-white print:text-black">
+    <div className="flex flex-col items-center min-h-screen bg-[#ECECEC] text-[#0A0A0A] p-4 sm:p-6 lg:p-8">
+      <div className="w-full max-w-5xl mb-4 flex items-center justify-between print:hidden">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.08em] text-black/70 hover:text-[#0052FF] transition-colors"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Back to Portfolio
+        </Link>
+        <a
+          href="/devesh_resume.pdf"
+          download="Devesh_Tiwari_Resume.pdf"
+          className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-mono uppercase tracking-[0.06em] bg-[#0A0A0A] text-white hover:bg-[#0052FF] transition-colors stoik-chamfer-sm"
+        >
+          <ArrowDownToLine className="h-3.5 w-3.5" />
+          Download PDF
+        </a>
+      </div>
+      <main className="w-full max-w-5xl bg-white border border-black/10 stoik-chamfer-lg shadow-sm p-8 sm:p-12 print:shadow-none print:border-none print:bg-white print:text-black">
         {/* Header */}
-        <header className="relative text-center border-b border-border/50 pb-6 mb-8 print:border-black">
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent print:text-black print:bg-none">
+        <header className="relative text-center border-b border-black/10 pb-6 mb-8 print:border-black">
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-[-0.03em] text-[#0A0A0A] print:text-black">
             {devName}
           </h1>
-          <p className="text-sm mt-2 text-primary/80">Software Engineer | Full Stack &amp; AI Developer</p>
+          <p className="text-sm mt-2 text-[#0052FF] font-medium">
+            Software Engineer | Backend · Full-Stack · AI/ML
+          </p>
           <div className="absolute top-0 right-0 print:hidden">
             <a href="/devesh_resume.pdf" download="Devesh_Tiwari_Resume.pdf">
               <Button
                 variant="outline"
                 size="icon"
-                className="bg-card/50 hover:bg-primary/20"
+                className="bg-white hover:bg-[#0052FF]/10 border-black/15"
               >
-                <ArrowDownToLine className="h-4 w-4" />
+                <ArrowDownToLine className="h-4 w-4 text-[#0A0A0A]" />
                 <span className="sr-only">Download PDF</span>
               </Button>
             </a>
           </div>
-          <div className="mt-4 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground print:text-black">
-            <a href="tel:9506592662" className="flex items-center gap-2 hover:text-primary">
+          <div className="mt-4 flex justify-center items-center flex-wrap gap-x-6 gap-y-2 text-sm text-black/65 print:text-black">
+            <a href="tel:9506592662" className="flex items-center gap-2 hover:text-[#0052FF]">
               <Phone className="w-4 h-4" />
               9506592662
             </a>
-            <a href="mailto:tiwaridewesh234@gmail.com" className="flex items-center gap-2 hover:text-primary">
+            <a href="mailto:tiwaridewesh234@gmail.com" className="flex items-center gap-2 hover:text-[#0052FF]">
               <Mail className="w-4 h-4" />
               tiwaridewesh234@gmail.com
             </a>
-            <a href="https://github.com/deveshyaara" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary">
+            <a href="https://github.com/deveshyaara" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-[#0052FF]">
               <Github className="w-4 h-4" />
               github.com/deveshyaara
             </a>
-            <a href="https://www.linkedin.com/in/deveshcodes" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary">
+            <a href="https://www.linkedin.com/in/deveshcodes/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-[#0052FF]">
               <Linkedin className="w-4 h-4" />
               linkedin.com/in/deveshcodes
             </a>
@@ -110,11 +131,12 @@ export default function ResumePage() {
             <div className="space-y-6">
               {experience.map((exp, index) => (
                 <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-baseline">
-                    <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
-                    <span className="text-sm text-primary">{exp.period}</span>
+                  <div className="flex flex-wrap justify-between items-baseline gap-2">
+                    <h3 className="text-lg font-semibold text-foreground">{exp.company}</h3>
+                    <span className="text-sm font-medium text-[#0052FF]">
+                      {`${exp.title} | ${exp.period}`}
+                    </span>
                   </div>
-                  <p className="text-muted-foreground">{exp.company}</p>
                   <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground pl-2">
                     {exp.responsibilities.map((resp, idx) => (
                       <li key={idx}>{resp}</li>
@@ -135,13 +157,21 @@ export default function ResumePage() {
                 <div key={project.name} className="space-y-2">
                   <h3 className="text-lg font-semibold text-foreground">{project.name}</h3>
                   <p className="text-sm text-muted-foreground">{project.description}</p>
-                  <div className="flex flex-wrap gap-4">
-                    {project.links.map(link => (
-                      <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-accent-foreground hover:text-primary flex items-center gap-1">
-                        {link.name} <ExternalLink className="w-3 h-3" />
-                      </a>
-                    ))}
-                  </div>
+                  {project.links.length > 0 && (
+                    <div className="flex flex-wrap gap-4">
+                      {project.links.map((link) => (
+                        <a
+                          key={link.name}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-medium text-[#0052FF] hover:underline flex items-center gap-1"
+                        >
+                          {link.name} <ExternalLink className="w-3 h-3" />
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -155,9 +185,16 @@ export default function ResumePage() {
             <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground pl-2">
               {resumeCertDetails.map((cert, index) => (
                 <li key={index}>
-                  <strong>{cert.label}:</strong> {cert.text}
+                  <strong className="text-foreground">{cert.label}:</strong> {cert.text}
                   {cert.link && (
-                    <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-accent-foreground hover:text-primary ml-2">[Link]</a>
+                    <a
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#0052FF] font-medium hover:underline ml-2"
+                    >
+                      [Verify ↗]
+                    </a>
                   )}
                 </li>
               ))}

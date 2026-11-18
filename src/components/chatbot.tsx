@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { MessageSquare } from 'lucide-react';
 import { Button } from './ui/button';
 import ChatbotCard from './chatbot-card';
@@ -24,10 +24,19 @@ export default function Chatbot() {
     setIsOpen(false);
   }, []);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeChatbot();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isOpen, closeChatbot]);
+
   return (
     <>
-      {/* Floating action button — always visible */}
-      <div className="fixed bottom-4 right-4 sm:right-8 z-40 group">
+      {/* Floating action button — positioned above mobile hero card so it is never obscured */}
+      <div className="fixed bottom-[116px] md:bottom-5 right-4 sm:right-7 z-[92] group">
         <Button
           size="icon"
           className="rounded-full w-14 h-14 shadow-[0_0_15px_rgba(0,243,255,0.4)] bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300"
